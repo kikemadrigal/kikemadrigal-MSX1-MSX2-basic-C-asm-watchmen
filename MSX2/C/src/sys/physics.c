@@ -92,7 +92,7 @@ void sys_physics_check_keyboard(TEntity *entity){
     if(joy==2){
         entity->dir=2;
         sys_anim_update(entity);
-        if(tile_derecha<tile_floor_tile || tile_derecha==255){
+        if(tile_derecha<tile_floor_tile || tile_derecha==tile_empty){
             entity->x+=entity->vx;
             entity_jump(entity); 
         }else{
@@ -104,7 +104,7 @@ void sys_physics_check_keyboard(TEntity *entity){
     if(joy==8){
         entity->dir=8;
         sys_anim_update(entity);
-        if(tile_izquierda<tile_floor_tile || tile_izquierda==255){
+        if(tile_izquierda<tile_floor_tile || tile_izquierda==tile_empty){
             entity_jump(entity);
             entity->x-=entity->vx; 
         }else{
@@ -115,7 +115,7 @@ void sys_physics_check_keyboard(TEntity *entity){
     if(joy==3){
         entity->dir=3;
         sys_anim_update(entity);
-        if(tile_derecha<tile_floor_tile || tile_derecha==255)
+        if(tile_derecha<tile_floor_tile || tile_derecha==tile_empty || tile_derecha==tile_door_right)
             entity->x+=entity->vx;
     }
     if(joy==4){
@@ -136,7 +136,7 @@ void sys_physics_check_keyboard(TEntity *entity){
     if(joy==7) {
         entity->dir=7;
         sys_anim_update(entity);
-        if(tile_izquierda<tile_floor_tile || tile_izquierda==255)
+        if(tile_izquierda<tile_floor_tile || tile_izquierda==tile_empty || tile_izquierda==tile_door_left)
             entity->x-=entity->vx; 
     }
 

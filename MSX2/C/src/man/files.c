@@ -16,7 +16,8 @@ void load_file_into_buffer_with_structure(char *p_name);
 //Un buffer es una dirección de memoria utilizada para escribir en ella reiteradamente
 //Lo utilizamos para cargar un sc5 y los archivos con los sprites
 #define BUFFER_SIZE 27142
-unsigned char buffer[BUFFER_SIZE];
+
+char buffer[BUFFER_SIZE];
 
 
 //Getrs & setters

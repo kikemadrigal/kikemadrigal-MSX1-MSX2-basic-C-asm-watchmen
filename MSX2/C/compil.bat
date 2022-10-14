@@ -31,6 +31,7 @@ move /y sprites.bin .\dsk
 move /y world0.bin .\dsk
 move /y world1.bin .\dsk
 move /y world2.bin .\dsk
+move /y world3.bin .\dsk
 move /y world4.bin .\dsk
 
 

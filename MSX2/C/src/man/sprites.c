@@ -50,6 +50,7 @@ unsigned char COLOR_DATA_ANY[]={
 
 
 //Tiles
+#define tile_empty 255 // vacio
 //Objects
 #define tile_phone1 160 // telefono
 #define tile_phone2 161 // telefono
@@ -58,8 +59,11 @@ unsigned char COLOR_DATA_ANY[]={
 //Solids
 #define tile_stairs1 192 // escalera
 #define tile_stairs2 193 // escalera
+#define tile_door_left 228 // muro que te deja pasar a la izquierda
+#define tile_door_right 229 // escalera
 #define tile_floor_tile 224 //suelo >224
-#define tile_desabled_divan 31 //suelo >224
+#define tile_wall 226 //suelo >224
+#define tile_desabled_divan 198 //suelo >224
 
 /*
 // SPRITE DATA

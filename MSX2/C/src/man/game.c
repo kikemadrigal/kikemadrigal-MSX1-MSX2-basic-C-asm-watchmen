@@ -136,7 +136,7 @@ void man_game_play(){
                 }
                 //Rollo disparos
                 if(enemy->dir==7 && player->x < enemy->x || enemy->dir==3 && player->x > enemy->x){
-                    if(sys_entity_get_num_shots()==0 && enemy->y==player->y && player->collider==0){
+                    if(sys_entity_get_num_shots()==0 && player->collider==0 && player->y<enemy->y+16 && player->y>=enemy->y ){
                         man_game_reproducir_efecto_sonido(1);
                         TEntity *shot=sys_entity_create_shot();
                         if(enemy->dir==3)shot->x=enemy->x+20;
@@ -145,7 +145,6 @@ void man_game_play(){
                         shot->dir=enemy->dir;
                         shot->plane+=sys_entity_get_num_shots();
                         SC5SpriteColors(shot->plane, &COLOR_DATA_SHOT[0]);
-                  
                     }
                 }
             }
@@ -349,8 +348,8 @@ void man_game_update(){
 void man_game_pintarMapa(){
     char numeroColumnas=32;
     char numeroFilas=23;
-    char filaEnTileset=0;
-    char columnaEnTileset=0;
+    //char filaEnTileset=0;
+    char columnaEnTileset;
     for (char f=0; f<numeroFilas;f++){
         for (char c=0; c<numeroColumnas;c++){
             //para tiles de 32*8 de ancho 23*8 de alto
@@ -467,11 +466,11 @@ void debug(){
     //PutText(0,200,Itoa(sys_collider_get_tile_array(player),"  ",10),8);
     //PutText(50,200,Itoa(player->collider,"  ",10),8);
 
+    int valor=(array_enemies[1].y)+16;
+    PutText(0,200,Itoa(player->y,"  ",10),8);
+    PutText(50,200,Itoa(valor,"  ",10),8);
+    PutText(80,200,Itoa(array_enemies[1].y,"  ",10),8);
 
-    PutText(0,200,Itoa(sys_entity_get_num_shots(),"  ",10),8);
-    PutText(50,200,Itoa(array_shots[0].x,"  ",10),8);
-    PutText(80,200,Itoa(array_shots[0].y,"  ",10),8);
-    PutText(120,200,Itoa(array_shots[0].plane,"  ",10),8);
 
     //printf("%d",buffer);
   
@@ -510,13 +509,16 @@ void pintar_HUD(){
 void show_menu_screen(){
     Cls();
     KillKeyBuffer();
-    PutText(0,0, "Eres un vigilante y como siempre estas durmiendo te han robado.",0);
-    PutText(0,16, "Recoge las monedas que han ido perdiendo y llama a la policia, depues pasa de vivel.",0);
+    PutText(80,0, "The watchmen",0);
+    PutText(0,16, "Eres un vigilante y como siempre estas durmiendo te han robado.",0);
+    PutText(0,32, "Recoge las monedas que han ido perdiendo, atrapa a los ladrones por la espalda",0);
+    PutText(0,56, "Puedes esconderte en los divanes",0);
+    HMMM(14*8,256+(16*8),8*8,12*8,144,48);
     PutText(20,180, "Press any key to continue",0);
     WaitForKey();
     SpriteOn();
     //le ponemos que el mundo actual sea el 0
-    actual_world=0;
+    actual_world=2;
     //Le ponemos que aplique que el mapa ha cambiado para que ponga
     // los objetos, enemigos y la posición del player del mundo correspondiente
     // Esto se aplica en el método man_game_update

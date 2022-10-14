@@ -32,8 +32,8 @@ void sys_ai_update_enemy_behavior_1(TEntity *enemy){
         else if(enemy->dir==3) enemy->dir=7;
         //Beep();
     }*/
-    //if (get_tile_down_array(enemy)<man_graphics_get_tile_suelo()) enemy->y+=enemy->vy;
-    if (get_tile_down_right_array(enemy)==255 || get_tile_down_left_array(enemy)==255) {
+    //Si el tile de abajo a la derecha es un vacío invertimos la dirección
+    if (get_tile_down_right_array(enemy)==tile_empty || get_tile_down_left_array(enemy)==tile_empty || sys_collider_get_tile_right_array(enemy)==tile_wall || sys_collider_get_tile_left_array(enemy)==tile_wall) {
         if(enemy->dir==7) enemy->dir=3;
         else if(enemy->dir==3) enemy->dir=7;
     }
