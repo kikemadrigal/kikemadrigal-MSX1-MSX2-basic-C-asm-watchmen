@@ -7,10 +7,15 @@
 
 #### C
 
-https://kikemadrigal.github.io/MSX1-MSX2-basic-C-asm-watchmen/?disk=MSX2-C.dsk
+https://kikemadrigal.github.io/kikemadrigal-MSX1-MSX2-basic-C-asm-watchmen/?disk=MSX2-C.dsk
+
 
 
 <img src=images/MSX2-C.PNG width=300px/>
+
+<img src=images/MSX2-C-MENU.PNG width=300px/>
+
+<img src=images/MSX2-C-0.PNG width=300px/>
 
 <img src=images/MSX2-C-1.PNG width=300px/>
 
