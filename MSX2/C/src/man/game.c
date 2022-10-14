@@ -518,7 +518,7 @@ void show_menu_screen(){
     WaitForKey();
     SpriteOn();
     //le ponemos que el mundo actual sea el 0
-    actual_world=4;
+    actual_world=0;
     //Le ponemos que aplique que el mapa ha cambiado para que ponga
     // los objetos, enemigos y la posición del player del mundo correspondiente
     // Esto se aplica en el método man_game_update
