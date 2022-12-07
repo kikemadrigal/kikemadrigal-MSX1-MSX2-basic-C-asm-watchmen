@@ -12,14 +12,15 @@
 #include "src/sys/ai.c"
 #include "src/man/files.c"
 #include "src/man/sprites.c"
-#include "src/man/game_coordenates.c"
+//#include "src/man/game_coordenates.c"
 
 void man_game_init();
 void man_game_play();
 void man_game_update();
 void man_game_pintarMapa();
 void man_game_showBuffer();
-void man_game_copiarSpritesVRAM();
+void man_game_copy_sprites_definition_to_VRAM();
+void man_game_copy_color_sprite_to_VRAM();
 void man_game_cargar_buffer_musica();
 void man_game_cargar_buffer_efectos_sonido();
 void man_game_reproducir_musica_y_efectos();
@@ -50,6 +51,7 @@ char actual_world;
 char world_change;
 char enabled_world_change;
 char world_money;
+char created_enemy2;
 //char world_enemy_to_capture;
 unsigned int time;
 unsigned int count_down;
@@ -66,6 +68,7 @@ TEntity* array_objects;
 TEntity* array_shots;
 
 int resultado;
+
 void man_game_init(){
     //Encendemos la pantalla que estaba desactiavda desde basic
     ShowDisplay();
@@ -83,11 +86,9 @@ void man_game_init(){
     // 1. que hemos puesto en inicio y: 256.
     // 2. Hemos utilizado LMMC que nos permite introducir la transparencia
     HMMC(&buffer[0], 0,256,256,212); 
-    //Cargamos los sprites
-    load_file_into_buffer("sprites.bin");
-    //Los pasamos a la VRAM
-    man_game_copiarSpritesVRAM();
-
+    //Los pasamos los psrites a la VRAM
+    man_game_copy_sprites_definition_to_VRAM();
+    man_game_copy_color_sprite_to_VRAM();
     //Cargamos los efectos de sonido  
     InitPSG(); 
     InitFX();
@@ -96,8 +97,6 @@ void man_game_init(){
     man_game_cargar_buffer_musica();
     //load_file_into_buffer_with_structure("song1.pt3");
     PT3Init (songBuffer+99, 0);
-    //incializamos el cronómetro
-    SetRealTimer(0);
     //Le quitamos el sonido a las pulsaciones	
     KeySound(0);
     //creamos al player
@@ -106,7 +105,8 @@ void man_game_init(){
     array_enemies=sys_entity_get_array_structs_enemies();
     array_objects=sys_entity_get_array_structs_objects();
     array_shots=sys_entity_get_array_structs_shots();
-    //SetSpritePattern(object_any, &COLOR_DATA_ANY[0],32);
+    //le decimos que no hemos creado el 2 enemigo hasta que el tiempo sea menor que 100
+    created_enemy2=0;
 }
 
 void man_game_play(){
@@ -131,6 +131,7 @@ void man_game_play(){
                         man_game_reproducir_efecto_sonido(1);
                         sys_entity_erase_enemy(i);
                         pintar_HUD();
+                        if(enemy->type==entity_type_enemy2) created_enemy2=0;
                     }
                     else player_die();
                 }
@@ -144,7 +145,6 @@ void man_game_play(){
                         shot->y=enemy->y+8;
                         shot->dir=enemy->dir;
                         shot->plane+=sys_entity_get_num_shots();
-                        SC5SpriteColors(shot->plane, &COLOR_DATA_SHOT[0]);
                     }
                 }
             }
@@ -152,6 +152,7 @@ void man_game_play(){
             //Shots
             for (char i=0;i<sys_entity_get_num_shots();++i){
                 TEntity *shot=&array_shots[i];
+                //shot->plane=shot_plane+sys_entity_get_num_shots();
                 sys_physics_update(shot);
                 //Colisión del disparo con el player
                 if (sys_collider_entity1_collider_shot(player, shot)){
@@ -182,11 +183,8 @@ void man_game_play(){
                             world_money-=1;
                             sys_entity_erase_object(i);
                             pintar_HUD();
-                        }
-                       
+                        } 
                     }   
-                
-
             }
 
 
@@ -214,9 +212,19 @@ void man_game_play(){
             //Mostramos el temporizador
             time=RealTimer();
             count_down=200-(time/60);
+            if(count_down % 100==0 && created_enemy2==0) {
+                TEntity *enemy2=sys_entity_create_enemy1();
+                enemy2->x=256/2;
+                enemy2->y=16;
+                enemy2->type=entity_type_enemy2;
+                enemy2->dir=3;
+                enemy2->plane+=sys_entity_get_num_enemies();
+                created_enemy2=1;
+            }
+
             if(count_down<=0) player_die();
             PutText(200,192,Itoa(count_down,"      ",10),0);
-           //debug();
+            //debug();
 
             //Pausa
             wait();
@@ -243,7 +251,7 @@ void player_die(){
         game_over=1;
         SpriteOff();
     }
-
+    
     pintar_HUD();
 }
 
@@ -266,56 +274,69 @@ void man_game_update(){
         sys_entity_erase_all_objects();
         sys_entity_erase_all_enemies();
         //Si el mundo ha cambiado, creamos los enemigos del mundo correspondiente
-        for (int i=0;i<MAX_enemies;i++){ 
-        TCoordinate_enemy* coordinate_enemy=&world_enemies[actual_world][i];
-            TEntity *enemy=sys_entity_create_enemy1();
-            enemy->x=coordinate_enemy->x;
-            enemy->y=coordinate_enemy->y;
-            enemy->type=coordinate_enemy->type;
-            enemy->plane+=sys_entity_get_num_enemies();
-            SC5SpriteColors(enemy->plane, &COLOR_DATA_ENEMY[0]);
+        //Cargamos las coordenadas de los enemigos en el buffer
+        load_file_into_buffer("e-coord.bin");
+      
+        for (int i=0;i<3*3;i+=3){ 
+             char numWorld=actual_world*9;
+             TEntity *enemy=sys_entity_create_enemy1();
+             enemy->x=buffer[numWorld+i];
+             enemy->y= buffer[numWorld+i+1];
+             enemy->type= buffer[numWorld+i+2];
+             enemy->plane+=sys_entity_get_num_enemies();
+        }
+        if(created_enemy2==1){
+             TEntity *enemy2=sys_entity_create_enemy1();
+            enemy2->x=256/2;
+            enemy2->y=16;
+            enemy2->type=entity_type_enemy2;
+            enemy2->dir=3;
+            enemy2->plane+=sys_entity_get_num_enemies();
         }
         //Creamos los objetos del mundo correspondiente
-        for (int i=0; i<MAX_objects;i++){
-        TCoordinate_object* coordinate_object=&world_objects[actual_world][i];
+        //Son 3 datos(x,y,tipo por 5 obetos por mundo)
+        load_file_into_buffer("o-coord.bin");
+        for (int i=0; i<(3*5);i+=3){
+            char numWorld=actual_world*15;
             TEntity *object=sys_entity_create_object();
-            object->x=coordinate_object->x;
-            object->y=coordinate_object->y;
-            object->type=coordinate_object->type;
-            object->plane+=sys_entity_get_num_objects();
-            SC5SpriteColors(object->plane, &COLOR_DATA_MONEY[0]);
+            object->x=buffer[numWorld+i];//x
+            object->y=buffer[numWorld+i+1];//y
+            object->type=buffer[numWorld+i+2];//type
+            if( object->type==object_divan1_pattern) object->plane=divan1_plane;
+            object->plane+=sys_entity_get_num_objects()-1;   
             sys_render_update(object);
         }
-        //Ponemos el player, la puerta y el teléfono en su sitio
-        TWorld *world=&world_coordenates[actual_world];
-        player->x=world->player_x;
-        player->y=world->player_y;
-        destiny_x_door=world->door_x;
-        destiny_y_door=world->door_y;
-        destiny_x_phone=world->phone_x;
-        destiny_y_phone=world->phone_y;
 
+        //Ponemos el player, la puerta y el teléfono en su sitio
+        load_file_into_buffer("g-coord.bin");
+        char numWorld=actual_world*6; //Son 6 bytes por mundo
+        player->x=buffer[numWorld+0];
+        player->y=buffer[numWorld+1];
+        destiny_x_door=buffer[numWorld+2];
+        destiny_y_door=buffer[numWorld+3];
+        destiny_x_phone=buffer[numWorld+4];
+        destiny_y_phone=buffer[numWorld+5];
 
         //Seleccionamos el archivo a cargar el mapa
         switch (actual_world)
         {
             case 0:
-                actual_world_string="world0.bin";
+                actual_world_string="level0.bin";
                 break;
             case 1:
-                actual_world_string="world1.bin";
+                actual_world_string="level1.bin";
                 break;
             case 2:
-                actual_world_string="world2.bin";
+                actual_world_string="level2.bin";
                 break;
             case 3:
-                actual_world_string="world3.bin";
+                actual_world_string="level3.bin";
                 break;
             case 4:
-                actual_world_string="world4.bin";
+                actual_world_string="level4.bin";
                 break;
             default:
-                actual_world_string="world0.bin";
+                actual_world_string="level5.bin";
                 break;
         }
         //cargamos el mapa en un array, es decir en una posición de la memoria "Buffer"
@@ -330,6 +351,7 @@ void man_game_update(){
         enabled_world_change=0;
         //Pintamos la puntuacón una vez que hemos creado el numEnmeies
         pintar_HUD();
+        SetRealTimer(0);
         //PutText(0,0,Itoa(player->plane,"  ",10),8);
         //PutText(20,0,Itoa(array_enemies[0].plane,"  ",10),8);
         //PutText(80,0,Itoa(divan1_plane,"  ",10),8);
@@ -379,19 +401,9 @@ void man_game_showBuffer(){
         } 
     }
 }
-void man_game_copiarSpritesVRAM(){
-    //Del sprite 0 al 7 le ponemos el color del player
-    //Los demás colores serán asignados en tiempo de ejecución
-    for (char i=0; i<8; i++) {		
-        SC5SpriteColors(i, &COLOR_DATA_PLAYER[0]);
-    }
-    //Los sprites van del 0 al 16
-    //divan    del 0 al 1
-    //Player   del 2 al 9
-    //Enemigos del 10 al 13
-    //Moneda 14
-    //Disparo 15
-	for (char i=0; i<17; i++) {		
+void man_game_copy_sprites_definition_to_VRAM(){
+    load_file_into_buffer("sprites.bin");
+	for (char i=0; i<total_sprites; i++) {		
 		SetSpritePattern(i*4, &buffer[i*32],32);
         //También es posible cargar los sprites como datos, si antes hemos sacado
         // los datos del spritedevtool, habilita el include
@@ -401,6 +413,19 @@ void man_game_copiarSpritesVRAM(){
     //printf("%d", &buffer[0]);
 	//Tablas patrones	
     //CopyRamToVram (&tab_sprites_from_fichero[0], dirBaseTablaSpritesPatrones, TAM_SpritesPatrones);
+}
+void man_game_copy_color_sprite_to_VRAM(){
+    load_file_into_buffer("sprcol.bin");
+    //Del sprite 0 al 7 le ponemos el color del player
+    //Los demás colores serán asignados en tiempo de ejecución
+    /*for (char i=0; i<8; i++) {		
+        SC5SpriteColors(i, &COLOR_DATA_PLAYER[0]);
+    }*/
+
+    for (char i=0; i<total_sprites; i++) {	
+        SC5SpriteColors(i, &buffer[i*16]);
+    }
+
 }
 
 void wait(){
@@ -456,20 +481,29 @@ void man_game_reproducir_efecto_sonido(char effect){
 }
 
 void debug(){
+    
     //void Rect ( int X1, int Y1, int X2, int Y2, int color, int OP )
     //void BoxFill (int X1, int Y1, int X2, int yY22, char color, char OP )
     //time=RealTimer();      // Read Current Timer Value
     //minutes=time/3000;             
     //secunds=time/50;
-    //TEntity *object=&array_objects[0];
+    //TEntity *object0=&array_objects[0];
+    //TEntity *object1=&array_objects[1];
+    //TEntity *object2=&array_objects[2];
+    //TEntity *object3=&array_objects[3];
+    TEntity *enemy=&array_enemies[3];
+    TEntity *shot=&array_shots[0];
     BoxFill (0, 23*8, 256, 210, 6, LOGICAL_IMP );
-    //PutText(0,200,Itoa(sys_collider_get_tile_array(player),"  ",10),8);
-    //PutText(50,200,Itoa(player->collider,"  ",10),8);
+    PutText(0,200,Itoa(enemy->plane,"  ",10),8);
+    PutText(50,200,Itoa(shot->plane,"  ",10),8);
+    PutText(100,200,Itoa(sys_entity_get_num_enemies(),"  ",10),8); 
+    //PutText(150,200,Itoa(object3->plane,"  ",10),8); 
+    //int valorX=(buffer[0]);
+    //int valorY=(buffer[1]);
 
-    int valor=(array_enemies[1].y)+16;
-    PutText(0,200,Itoa(player->y,"  ",10),8);
-    PutText(50,200,Itoa(valor,"  ",10),8);
-    PutText(80,200,Itoa(array_enemies[1].y,"  ",10),8);
+    //PutText(0,200,Itoa(sys_entity_get_num_enemies(),"  ",10),8);
+    //PutText(0,200,Itoa(valorY,"  ",10),8);
+  
 
 
     //printf("%d",buffer);

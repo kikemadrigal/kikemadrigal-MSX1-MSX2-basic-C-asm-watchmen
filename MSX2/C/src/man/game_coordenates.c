@@ -24,7 +24,7 @@ struct TCoordinate_object{
 }; 
 /**************************************************************************************
 ****************************                     **************************************
-**************************** PLAYER, PONE & DOOR **************************************
+******************** GAME POSITIONS=PLAYER, PONE & DOOR *******************************
 ****************************                     ************************************** 
 ***************************************************************************************/
 
@@ -74,7 +74,7 @@ TCoordinate_enemy world_enemies[][MAX_enemies]={
     { //coordinate_enemy 1
       4*8,
       9*8,
-      entity_type_enemy1 
+      entity_type_enemy2 
     },
     { //coordinate_enemy 2
       6*8,
@@ -172,7 +172,7 @@ TCoordinate_object world_objects[][MAX_objects]={
       entity_type_object_money
     },
     { //coordinate_enemy 3
-      15*8,
+      14*8,
       15*8,
       entity_type_object_divan
     }  

@@ -77,7 +77,8 @@ int get_tile_down_right_array(TEntity *entity){
 
 char sys_collider_entity1_collider_entity(TEntity *entity1, TEntity *entity2){
     //if (enemiX < player.x + 16 &&  enemiX + 16 > player.x && enemiY < player.y + 32 && 16 + enemiY > player.y){
-    if (entity2->x < entity1->x + 16 &&  entity2->x + 16 > entity1->x && entity2->y < entity1->y + 16 && 16 + entity2->y > entity1->y){
+    //if (entity2->x < entity1->x + 16 &&  entity2->x + 16 > entity1->x && entity2->y < entity1->y + 16 && 16 + entity2->y > entity1->y){
+    if (entity2->x < entity1->x + entity1->w &&  entity2->x + entity2->w > entity1->x && entity2->y < entity1->y + entity1->h && entity2->h + entity2->y > entity1->y){
         return 1;
     }else{
         return 0;

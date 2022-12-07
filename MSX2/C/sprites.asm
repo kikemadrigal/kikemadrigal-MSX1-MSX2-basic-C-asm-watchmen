@@ -15,15 +15,15 @@ INICIO:
 	call #0047;WRTVDP equ #0047, b data to write, c number register, escribe en los registros del VDP
 	ld hl, sprites_definition
 	ld de, 30720 ;&h7800, base(29) en sc5
-	ld bc, 32*25
+	ld bc, 32*24
 	call  #005C; #005C=LDIRVM 
 	ld hl, sprites_colors
 	ld de, 29696 ;&h7400, en sc5
-	ld bc, 16*25
+	ld bc, 16*24
 	call  #005C; #005C=LDIRVM 
 	ld hl, sprites_atributes
 	ld de, 30208 ;&h7600, base(28) en sc5
-	ld bc, 4*25
+	ld bc, 4*24
 	call  #005C; #005C=LDIRVM 
 .bucle: 
 	jr .bucle
@@ -148,4 +148,102 @@ sprites_definition:
 	db 213,171,213,107,53,27,13,7
 	db 1,3,7,13,27,53,235,213
 	db 171,213,171,214,172,216,176,224
+sprites_colors: 
+;Data colors sprite 0, name: fire
+	db 10,10,8,8,8,8,8,8,8,8,8,8,8,8,8,8
+;Data colors sprite 1, name: player-left-1
+	db 6,6,9,9,9,4,4,4,5,5,6,6,6,6,6,12
+;Data colors sprite 2, name: player-left-2
+	db 6,6,9,9,9,4,4,4,5,5,6,6,6,6,6,12
+;Data colors sprite 3, name: player-right-1
+	db 6,6,9,9,9,4,4,4,5,5,6,6,6,6,6,12
+;Data colors sprite 4, name: player-right-2
+	db 6,6,9,9,9,4,4,4,5,5,6,6,6,6,6,12
+;Data colors sprite 5, name: player-up-1
+	db 6,6,9,9,9,4,4,4,5,5,6,6,6,6,6,12
+;Data colors sprite 6, name: player-up-2
+	db 6,6,9,9,9,4,4,4,5,5,6,6,6,6,6,12
+;Data colors sprite 7, name: player-left-2
+	db 6,6,9,9,9,4,4,4,5,5,5,5,5,5,5,5
+;Data colors sprite 8, name: player-left-2
+	db 6,6,9,9,9,4,4,4,5,5,5,5,5,5,5,5
+;Data colors sprite 9, name: Enemy-right-1
+	db 6,6,6,12,12,12,12,12,12,12,12,13,13,6,6,6
+;Data colors sprite 10, name: Enemy-right-2
+	db 6,6,6,6,12,12,12,12,12,12,12,12,12,13,13,13
+;Data colors sprite 11, name: Enemy-left-1
+	db 6,6,6,12,12,12,12,12,12,12,12,13,13,6,6,6
+;Data colors sprite 12, name: Enemy-left-2
+	db 6,6,6,6,12,12,12,12,12,12,12,12,12,13,13,13
+;Data colors sprite 13, name: Enemy-2-right-1
+	db 9,9,9,9,6,8,8,8,8,8,8,8,8,8,14,14
+;Data colors sprite 14, name: Enemy-2-right-2
+	db 9,9,9,9,6,8,8,8,8,8,8,8,8,8,14,14
+;Data colors sprite 15, name: Enemy-2-left-1
+	db 9,9,9,9,6,8,8,8,8,8,8,8,8,8,14,14
+;Data colors sprite 16, name: Enemy-2-left-2
+	db 9,9,9,9,6,8,8,8,8,8,8,8,8,8,14,14
+;Data colors sprite 17, name: Enemy-2-up-1
+	db 9,9,9,9,6,8,8,8,8,8,8,8,8,8,14,14
+;Data colors sprite 18, name: Enemy-2-up-2
+	db 9,9,9,9,6,8,8,8,8,8,8,8,8,8,14,14
+;Data colors sprite 19, name: object-1-money
+	db 0,0,10,10,10,10,10,10,10,10,14,14,14,14,14,14
+;Data colors sprite 20, name: object-2-money
+	db 0,0,10,10,10,10,10,10,10,10,14,14,14,14,14,14
+;Data colors sprite 21, name: object-3-money
+	db 0,0,10,10,10,10,10,10,10,10,14,14,14,14,14,14
+;Data colors sprite 22, name: diban-rojo
+	db 8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8
+;Data colors sprite 23, name: diban-azul
+	db 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
+sprites_atributes: 
+;Data atributes sprite (y,x,patron,color) 0, name: fire
+	db 0,0,0, " "
+;Data atributes sprite (y,x,patron,color) 1, name: player-left-1
+	db 0,33,4, " "
+;Data atributes sprite (y,x,patron,color) 2, name: player-left-2
+	db 0,66,8, " "
+;Data atributes sprite (y,x,patron,color) 3, name: player-right-1
+	db 0,99,12, " "
+;Data atributes sprite (y,x,patron,color) 4, name: player-right-2
+	db 0,132,16, " "
+;Data atributes sprite (y,x,patron,color) 5, name: player-up-1
+	db 0,165,20, " "
+;Data atributes sprite (y,x,patron,color) 6, name: player-up-2
+	db 0,198,24, " "
+;Data atributes sprite (y,x,patron,color) 7, name: player-left-2
+	db 0,231,28, " "
+;Data atributes sprite (y,x,patron,color) 8, name: player-left-2
+	db 33,0,32, " "
+;Data atributes sprite (y,x,patron,color) 9, name: Enemy-right-1
+	db 33,33,36, " "
+;Data atributes sprite (y,x,patron,color) 10, name: Enemy-right-2
+	db 33,66,40, " "
+;Data atributes sprite (y,x,patron,color) 11, name: Enemy-left-1
+	db 33,99,44, " "
+;Data atributes sprite (y,x,patron,color) 12, name: Enemy-left-2
+	db 33,132,48, " "
+;Data atributes sprite (y,x,patron,color) 13, name: Enemy-2-right-1
+	db 33,165,52, " "
+;Data atributes sprite (y,x,patron,color) 14, name: Enemy-2-right-2
+	db 33,198,56, " "
+;Data atributes sprite (y,x,patron,color) 15, name: Enemy-2-left-1
+	db 33,231,60, " "
+;Data atributes sprite (y,x,patron,color) 16, name: Enemy-2-left-2
+	db 66,0,64, " "
+;Data atributes sprite (y,x,patron,color) 17, name: Enemy-2-up-1
+	db 66,33,68, " "
+;Data atributes sprite (y,x,patron,color) 18, name: Enemy-2-up-2
+	db 66,66,72, " "
+;Data atributes sprite (y,x,patron,color) 19, name: object-1-money
+	db 66,99,76, " "
+;Data atributes sprite (y,x,patron,color) 20, name: object-2-money
+	db 66,132,80, " "
+;Data atributes sprite (y,x,patron,color) 21, name: object-3-money
+	db 66,165,84, " "
+;Data atributes sprite (y,x,patron,color) 22, name: diban-rojo
+	db 66,198,88, " "
+;Data atributes sprite (y,x,patron,color) 23, name: diban-azul
+	db 66,231,92, " "
 FINAL: 

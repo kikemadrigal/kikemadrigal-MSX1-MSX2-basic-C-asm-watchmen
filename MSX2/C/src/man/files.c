@@ -31,12 +31,12 @@ void load_file_into_buffer_with_structure(char *filename){
   enter_name_and_extension_in_structure(&struct_fcb, filename);
   fcb_open(&struct_fcb);
   //Si no omitimos los 8 primeros bytes (los que defininen la estructura del binario) aparecen  unas marcas arriba a la derecha
-  fcb_read( &struct_fcb, &buffer[0], 8 ); 
+  fcb_read( &struct_fcb, &buffer[0], 7 ); 
   //Cargamos el archivo definido en la estructura y lo ponemos en la RAM (buffer)
   fcb_read( &struct_fcb, &buffer[0], BUFFER_SIZE );  
   fcb_close( &struct_fcb );
 }
-
+//Intenta crear el nombre de los archivos menor de 8 letras
 void load_file_into_buffer(char *filename) {
   int file;	// Set a file handler variable
   //byte buffer[Cabecera_Fichero];

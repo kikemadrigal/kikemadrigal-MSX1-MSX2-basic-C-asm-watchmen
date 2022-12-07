@@ -1,0 +1,57 @@
+Sjasm Z80 Assembler v0.42c - www.xl2s.tk             [2022.11.28 - 04:48:03]
+
+asm/g-coord.asm
+Errors: 0
+
+       1   00:0000                      		 output g-coord.bin
+       2   00:D000  FE                  	db   #fe
+       3   00:D001  00 D0               	dw   INICIO 
+       4   00:D003  1E D0               	dw   FINAL
+       5   00:D005  00 D0               	dw   INICIO 
+       6   00:D007                      	org  #d000 
+       7   00:D000                      INICIO: 
+       8   00:D000                          ;world 0
+       9   00:D000  08 98               	db 1*8,19*8   ;Player initial position x, y
+      10   00:D002  E8 10                   db 29*8,2*8   ;door position x, y
+      11   00:D004  00 78                   db 0,15*8     ;Phone position x, y 
+      12   00:D006                          ;world 1
+      13   00:D006  20 A0                   db  4*8,20*8
+      14   00:D008  10 20                   db 2*8,4*8
+      15   00:D00A  E0 50                   db 28*8,10*8   
+      16   00:D00C                          ;wordl 2
+      17   00:D00C  18 A0                   db 3*8,20*8   ;Player initial position
+      18   00:D00E  20 78                   db 4*8,15*8   ;door position
+      19   00:D010  D8 58                   db 27*8,11*8  ;Phone position
+      20   00:D012                          ;World3
+      21   00:D012  10 A0                   db 2*8,20*8   ;Player initial position
+      22   00:D014  08 08                   db 1*8,1*8    ;door position
+      23   00:D016  C8 80                   db 25*8,16*8  ;Phone position
+      24   00:D018                          ;World4
+      25   00:D018  A0 98                   db 20*8,19*8  ;Player initial position
+      26   00:D01A  08 08                   db 1*8,1*8    ;door position
+      27   00:D01C  E8 A0                   db 29*8,20*8  ;Phone position
+      28   00:D01E                      
+      29   00:D01E                      FINAL: 
+
+    LABELS
+-------------------------------------------------
+00:0000D000   INICIO
+00:0000D01E   FINAL
+
+
+ Output: asm/g-coord.out
+-------------------------------------------------
+
+ Page: 00
+  Org: 0000D000  Size: *  Used: 00000000
+
+    No output
+
+ Output: g-coord.bin
+-------------------------------------------------
+
+ Page: 00
+  Org: 0000D000  Size: *  Used: 00000025
+
+   Address   Length Align   Label
+   0000D000      37         INICIO
