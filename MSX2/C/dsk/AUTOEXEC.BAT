@@ -1,4 +1,2 @@
-echo off
-cls
 watchmen
 

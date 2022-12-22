@@ -24,8 +24,9 @@
 HEX2BINDIR = ./										# where is the hex2bin folder : ./ if installed in system
 HEX2BIN = hex2bin       							# name of hex2bin command name
 ASM = sdasz80  										# ASM compilator command name
-CC = sdcc  											# SDCC commpilator command name
-C_FILES :=  $(CompFile) #test.c  $(wildcard *.c) 	# which files to compil. File name must be sent by Sublime Text Build Systeme into the $(CompFile) variable
+CC = sdcc  	# SDCC commpilator command name
+								
+C_FILES :=  $(wildcard *.c) 	# which files to compil. File name must be sent by Sublime Text Build Systeme into the $(CompFile) variable
 DEST := dsk/ 										# destination of executable files
 ASM_FILES := $(wildcard *.s)  						# definition of sources files 
 REL_FILES := $(subst .s,.rel,$(ASM_FILES))          # definition of .rel files
@@ -35,6 +36,7 @@ COM_FILES := $(subst .ihx,.com,$(IHX_FILES)) 		# definition of .com files
 
 # Folder where to find other compiled files to include
 INCLUDEDIR = ./fusion-c/include/
+
 # Folder where to find Fusion.lib 		
 LIBDIR = ./fusion-c/lib/
 
@@ -45,7 +47,6 @@ crt0 = $(INCLUDEDIR)crt0_msxdos.rel
 #crt0 = $(INCLUDEDIR)crt0_msxdos_advanced.rel
 
 #INC1 = $(INCLUDEDIR)
-#INC2 = $(INCLUDEDIR)
 #INC3 = $(INCLUDEDIR)
 #INC4 = $(INCLUDEDIR)
 #INC5 = $(INCLUDEDIR)
@@ -67,7 +68,7 @@ ADDR_CODE = 0x106
 ADDR_DATA = 0x0
 
 # The above line is the full command line used by SDD to compil and link your to source file to an MSX-DOS executable
-CCFLAGS = --code-loc $(ADDR_CODE) --data-loc $(ADDR_DATA) --disable-warning 196 -mz80 --no-std-crt0 --opt-code-size fusion.lib -L $(LIBDIR) $(crt0) $(INC1) $(INC2) $(INC3) $(INC4) $(INC5) $(INC6) $(INC7) $(INC8) $(INC9) $(INCA) $(INCB) $(INCC) $(INCD) $(INCE) $(INCF)
+CCFLAGS = --code-loc $(ADDR_CODE) --data-loc $(ADDR_DATA) --disable-warning 196 -mz80 --no-std-crt0 --opt-code-size fusion.lib -L $(LIBDIR) $(crt0) $(INC1) $(INC2) $(INC3) $(INC4) $(INC5) $(INC6) $(INC7) $(INC8) $(INC9) $(INCA) $(INCB) $(INCC) $(INCD) $(INCE) $(INCF)  	
 
 
 ########## END OF CONFIGURATION ######################
@@ -75,12 +76,13 @@ CCFLAGS = --code-loc $(ADDR_CODE) --data-loc $(ADDR_DATA) --disable-warning 196 
 
 all:  $(REL_FILES) $(COM_FILES) clean emulator
 
+
 %.ihx: %.c
-	@SDCC $(CCFLAGS) $^
+	@sdcc $(CCFLAGS) $^ 
 	@echo "..•̀ᴗ•́)و .. $(CC) is Processing ... !"
 
 %.com: %.ihx
-	@hex2bin -e com $^
+	./hex2bin -e com $^ 
 	@cp $@ $(DEST)
 	@echo "... (•̀ᴗ•́)و Updating files in  $(DEST)... !"
 %.rel: %.s

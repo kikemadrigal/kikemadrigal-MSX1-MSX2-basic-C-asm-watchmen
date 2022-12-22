@@ -1,7 +1,7 @@
 #pragma once
-#include "src/man/entity.c"
+#include "../../src/man/entity.c"
 //Para el buffer
-#include "src/man/files.c"
+#include "../../src/man/files.c"
 
 /**************DECLARACIONES************/
 void sys_collider_init();

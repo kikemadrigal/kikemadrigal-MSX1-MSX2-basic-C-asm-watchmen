@@ -1,12 +1,12 @@
 #pragma once
-#include "./src/man/entity.c"
-#include "./src/sys/anim.c"
+#include "../../src/man/entity.c"
+#include "../../src/sys/anim.c"
 //Para obtener el tile para subir por la escalera
-#include "./src/sys/collider.c"
+#include "../../src/sys/collider.c"
 //Para obetenr la definición de los tiles
-#include "./src/man/sprites.c"
+#include "../../src/man/sprites.c"
 ////Para el man_game_reproducir_efecto_sonido y man_game_crear_disparo()
-#include "./src/man/game.c"
+#include "../../src/man/game.c"
 
 
 

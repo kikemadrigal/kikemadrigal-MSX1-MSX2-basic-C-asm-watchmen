@@ -12,6 +12,12 @@
         "*.a06": "z80",
         "*.a02": "z80",
         "*.a05": "z80",
-        "vdp_graph2.h": "c"
+        "vdp_graph2.h": "c",
+        "msx_fusion.h": "c",
+        "vdp_sprites.h": "c",
+        "pt3replayer.h": "c",
+        "ayfx_player.h": "c",
+        "io.h": "c",
+        "stdlib.h": "c"
     }
 }

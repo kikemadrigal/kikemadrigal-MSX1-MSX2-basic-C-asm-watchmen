@@ -1,5 +1,5 @@
 #pragma once
-#include "./src/man/entity.c"
+#include "../../src/man/entity.c"
 
 
 //Declarations

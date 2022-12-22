@@ -1,9 +1,9 @@
 #pragma once
-#include "fusion-c/header/msx_fusion.h"
+#include "../../fusion-c/header/msx_fusion.h"
 //rand y srand http://cplusplus.com/reference/cstdlib/rand/
 #include <stdlib.h>
-#include "src/man/entity.c"
-#include "src/sys/physics.c"
+#include "../../src/man/entity.c"
+#include "../../src/sys/physics.c"
 //Declarations
 void sys_ai_init();
 void sys_ai_update(TEntity *entity);

@@ -1,9 +1,9 @@
 #pragma once
-#include "fusion-c/header/msx_fusion.h"
-#include "fusion-c/header/vdp_graph2.h"
-#include "src/man/entity.c"
-#include "src/man/sprites.c"
-#include "src/sys/anim.c"
+#include "../../fusion-c/header/msx_fusion.h"
+#include "../../fusion-c/header/vdp_graph2.h"
+#include "../../src/man/entity.c"
+#include "../../src/man/sprites.c"
+#include "../../src/sys/anim.c"
 //Declarations
 void sys_render_init();
 void sys_render_update(TEntity *entity);

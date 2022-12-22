@@ -1,10 +1,10 @@
 
 #pragma once
-#include "fusion-c/header/msx_fusion.h"
+#include "../../fusion-c/header/msx_fusion.h"
 //para el memset
 #include <string.h>
 //Para las funciones con archivos
-#include "fusion-c/header/io.h"
+#include "../../fusion-c/header/io.h"
 //Para el printf
 #include <stdio.h>
 

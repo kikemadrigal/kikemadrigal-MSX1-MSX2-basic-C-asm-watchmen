@@ -1,17 +1,17 @@
 
 #pragma once
-#include "fusion-c/header/msx_fusion.h"
+#include "../../fusion-c/header/msx_fusion.h"
 //Para la función de setSpritePatter y SC5ColorSprite
-#include "fusion-c/header/vdp_sprites.h"
-#include "fusion-c/header/pt3replayer.h"
-#include "fusion-c/header/ayfx_player.h"
-#include "src/man/entity.c"
-#include "src/sys/physics.c"
-#include "src/sys/render.c"
-#include "src/sys/collider.c"
-#include "src/sys/ai.c"
-#include "src/man/files.c"
-#include "src/man/sprites.c"
+#include "../../fusion-c/header/vdp_sprites.h"
+#include "../../fusion-c/header/pt3replayer.h"
+#include "../../fusion-c/header/ayfx_player.h"
+#include "../../src/man/entity.c"
+#include "../../src/sys/physics.c"
+#include "../../src/sys/render.c"
+#include "../../src/sys/collider.c"
+#include "../../src/sys/ai.c"
+#include "../../src/man/files.c"
+#include "../../src/man/sprites.c"
 //#include "src/man/game_coordenates.c"
 
 void man_game_init();
@@ -386,17 +386,17 @@ void man_game_showBuffer(){
     Cls();
     Screen(1);
     unsigned int dir=0;
-    printf("%d",&buffer[0]);
-    printf("\r\n");
+    //printf("%d",&buffer[0]);
+    //printf("\r\n");
     int numeroColumnas=32;
     int numeroFilas=6;
     int columnaEnTileset=0;
     for (int f=4; f<numeroFilas;f++){
-        printf("\r\nFila %d\r\n  ",f);
+        //printf("\r\nFila %d\r\n  ",f);
         for (int c=0; c<numeroColumnas;c++){
             columnaEnTileset=(((buffer[c+(f*numeroColumnas)]/32)+1)*32)-(buffer[c+(f*numeroColumnas)]);
             resultado=(32-columnaEnTileset)*8;
-            printf("%d ",((buffer[c+(f*numeroColumnas)]/32)+1)*32);
+            //printf("%d ",((buffer[c+(f*numeroColumnas)]/32)+1)*32);
             
         } 
     }
