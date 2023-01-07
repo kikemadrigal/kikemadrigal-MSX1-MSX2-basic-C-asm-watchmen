@@ -1,4 +1,3 @@
-
 #pragma once
 #include "../../fusion-c/header/msx_fusion.h"
 //Para la función de setSpritePatter y SC5ColorSprite
@@ -11,14 +10,15 @@
 #include "../../src/sys/collider.c"
 #include "../../src/sys/ai.c"
 #include "../../src/man/files.c"
-#include "../../src/man/sprites.c"
-//#include "src/man/game_coordenates.c"
+
+
+
 
 void man_game_init();
 void man_game_play();
 void man_game_update();
 void man_game_pintarMapa();
-void man_game_showBuffer();
+//void man_game_showBuffer();
 void man_game_copy_sprites_definition_to_VRAM();
 void man_game_copy_color_sprite_to_VRAM();
 void man_game_cargar_buffer_musica();
@@ -382,7 +382,7 @@ void man_game_pintarMapa(){
     }
 }
 
-void man_game_showBuffer(){
+/*void man_game_showBuffer(){
     Cls();
     Screen(1);
     unsigned int dir=0;
@@ -400,7 +400,7 @@ void man_game_showBuffer(){
             
         } 
     }
-}
+}*/
 void man_game_copy_sprites_definition_to_VRAM(){
     load_file_into_buffer("sprites.bin");
 	for (char i=0; i<total_sprites; i++) {		
@@ -429,11 +429,13 @@ void man_game_copy_color_sprite_to_VRAM(){
 }
 
 void wait(){
-    __asm
-      halt
-      halt
-      halt
-  __endasm;
+    #ifdef __SDCC
+        __asm
+            halt
+            halt
+            halt
+        __endasm;
+    #endif
 }
 void man_game_cargar_buffer_musica(){
     enter_name_and_extension_in_structure( &TFileMusic, &fileNameSong[0]);

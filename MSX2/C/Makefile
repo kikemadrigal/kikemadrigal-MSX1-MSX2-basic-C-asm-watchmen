@@ -82,7 +82,7 @@ all:  $(REL_FILES) $(COM_FILES) clean emulator
 	@echo "..•̀ᴗ•́)و .. $(CC) is Processing ... !"
 
 %.com: %.ihx
-	./hex2bin -e com $^ 
+	./tools/hex2bin/hex2bin -e com $^ 
 	@cp $@ $(DEST)
 	@echo "... (•̀ᴗ•́)و Updating files in  $(DEST)... !"
 %.rel: %.s

@@ -1,6 +1,5 @@
 #include "src/man/game.c"
 
-
 void main(void) 
 {
   man_game_init();

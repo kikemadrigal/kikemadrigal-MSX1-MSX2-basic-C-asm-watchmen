@@ -1,7 +1,7 @@
 #pragma once
 //para el memset
 #include <string.h>
-#include "../../src/man/sprites.c"
+
 
 
 //================================Declarations
