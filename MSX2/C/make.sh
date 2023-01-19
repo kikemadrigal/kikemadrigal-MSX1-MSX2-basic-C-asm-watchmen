@@ -3,8 +3,7 @@
 
 CCFLAGS="--code-loc  0x106 --data-loc 0x0 --disable-warning 196 -mz80 --no-std-crt0 --opt-code-size"
 
-function compile() {
-
+function compileLinux() {
    sdcc ${CCFLAGS} fusion.lib -L ./fusion-c/lib/  ./fusion-c/include/crt0_msxdos.rel watchmen.c	
    ./tools/hex2bin/hex2bin -e com watchmen.ihx
    mv watchmen.com dsk/
@@ -23,7 +22,13 @@ function compile() {
    echo "hecho"
 }
 
-
+function compileWindowsWithBash() {
+   sdcc ${CCFLAGS} fusion.lib -L ./fusion-c/lib/  ./fusion-c/include/crt0_msxdos.rel watchmen.c	
+   ./tools/hex2bin/hex2bin.exe -e com watchmen.ihx
+   mv watchmen.com dsk/
+   ./tools/emulators/openMSX-16.0/openmsx.exe -machine Philips_NMS_8255  -diska dsk/ 
+   cleanObjects
+}
 
 #--------------------------------------------------------------------------
 # Removes all generated compilation objects
@@ -53,7 +58,8 @@ function cleanObjects() {
 ## Check parameter number
 if (( $# != 1 )); then
    clear
-   compile
+   #compileLinux
+   compileWindowsWithBash
 fi
 
 ## Check parameter

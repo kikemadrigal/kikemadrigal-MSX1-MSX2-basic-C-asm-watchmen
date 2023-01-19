@@ -18,6 +18,7 @@ void man_game_init();
 void man_game_play();
 void man_game_update();
 void man_game_pintarMapa();
+//char man_actualizar_tiles();
 //void man_game_showBuffer();
 void man_game_copy_sprites_definition_to_VRAM();
 void man_game_copy_color_sprite_to_VRAM();
@@ -62,20 +63,30 @@ unsigned int destiny_y_door;
 unsigned int destiny_x_phone;
 unsigned int destiny_y_phone; 
 char collision_divan;
+char permitirPintarTiles;
 
 TEntity* array_enemies;
 TEntity* array_objects;
 TEntity* array_shots;
 
-int resultado;
+
+
+
 
 void man_game_init(){
+    permitirPintarTiles=1;
     //Encendemos la pantalla que estaba desactiavda desde basic
     ShowDisplay();
     //Inicializamos la pantalla en screen 5
     sys_render_init();
     //Cargamos la imagen de carga del archivo a la RAM
     //char *image_loader_name[]={"LOADER.S05"};
+    load_file_into_buffer_with_structure("MSXSP.S05");
+    //Pasamos los datos de la RAM a la VRAM page 0
+    HMMC(&buffer[0], 0,0,256,212 ); 
+    for(int i=0;i<100;i++){
+        wait();
+    }
     load_file_into_buffer_with_structure("LOADER.S05");
     //Pasamos los datos de la RAM a la VRAM page 0
     HMMC(&buffer[0], 0,0,256,212 ); 
@@ -107,12 +118,31 @@ void man_game_init(){
     array_shots=sys_entity_get_array_structs_shots();
     //le decimos que no hemos creado el 2 enemigo hasta que el tiempo sea menor que 100
     created_enemy2=0;
+
+    
+  
+
+    
+
+
+    
 }
 
 void man_game_play(){
+    
+
+
+
     while(1){
+        /*
+        unsigned int prev_count=0;
+        InitInterruptHandler();
+        SetInterruptHandler( man_actualizar_tiles );
+        */
+
         show_menu_screen();
         while(game_over==0){
+            if( IsVsync() == 1 ) continue;
             //Game
             man_game_update();
             //Musica y efectos
@@ -212,7 +242,7 @@ void man_game_play(){
             //Mostramos el temporizador
             time=RealTimer();
             count_down=200-(time/60);
-            if(count_down % 100==0 && created_enemy2==0) {
+            if(count_down % 100==0 && created_enemy2==0 && actual_world>3) {
                 TEntity *enemy2=sys_entity_create_enemy1();
                 enemy2->x=256/2;
                 enemy2->y=16;
@@ -222,6 +252,14 @@ void man_game_play(){
                 created_enemy2=1;
             }
 
+            /*
+            if(count_down % 2==0 ) man_actualizar_tiles();
+            else permitirPintarTiles=1;
+            */
+            
+
+
+
             if(count_down<=0) player_die();
             PutText(200,192,Itoa(count_down,"      ",10),0);
             //debug();
@@ -229,7 +267,9 @@ void man_game_play(){
             //Pausa
             wait();
         }
+    //EndInterruptHandler();
     }
+
 }
 
 
@@ -368,19 +408,48 @@ void man_game_update(){
 
 
 void man_game_pintarMapa(){
+    unsigned int posicionX;
     char numeroColumnas=32;
     char numeroFilas=23;
     //char filaEnTileset=0;
-    char columnaEnTileset;
+    unsigned char posicionY;
     for (char f=0; f<numeroFilas;f++){
         for (char c=0; c<numeroColumnas;c++){
             //para tiles de 32*8 de ancho 23*8 de alto
-            columnaEnTileset=(((buffer[c+(f*numeroColumnas)]/32)+1)*32)-(buffer[c+(f*numeroColumnas)]);
-            resultado=(32-columnaEnTileset)*8;
-            HMMM(resultado,(buffer[c+(f*numeroColumnas)]/32)*8+256, c*8,f*8,8,8);
+            //posicionY=(((buffer[c+(f*numeroColumnas)]/32)+1)*32)-(buffer[c+(f*numeroColumnas)]);
+            posicionY=(((buffer[c+(f*numeroColumnas)]/32)+1)*32)-(buffer[c+(f*numeroColumnas)]);
+            posicionX=(32-posicionY)*8;
+            HMMM(posicionX,(buffer[c+(f*numeroColumnas)]/32)*8+256, c*8,f*8,8,8);
         }
     }
 }
+
+/*char man_actualizar_tiles(){
+    if(count_down % 2!=0 || permitirPintarTiles==0 ) return 0;
+    unsigned int posicionX;
+    char numeroColumnas=32;
+    char numeroFilas=23;
+    unsigned char posicionY;
+    int position=0;
+    char tile=0;
+    for (char f=0; f<numeroFilas;f++){
+        for (char c=0; c<numeroColumnas;c++){
+            tile=buffer[position];
+           if(tile==tile_fire || tile==tile_fire2 || tile==tile_swipe_left || tile==tile_swipe_left2){
+                if(tile==tile_fire) buffer[position]=tile_fire2;
+                else if(tile==tile_fire2) buffer[position]=tile_fire;
+                else if(tile==tile_swipe_left) buffer[position]=tile_swipe_left2;
+                else if(tile==tile_swipe_left2) buffer[position]=tile_swipe_left;
+                posicionY=(((buffer[c+(f*numeroColumnas)]/32)+1)*32)-(buffer[c+(f*numeroColumnas)]);
+                posicionX=(32-posicionY)*8;
+                HMMM(posicionX,(buffer[c+(f*numeroColumnas)]/32)*8+256, c*8,f*8,8,8);
+           }
+           position++;
+        }
+    }
+    permitirPintarTiles=0;
+    return 1;
+}*/
 
 /*void man_game_showBuffer(){
     Cls();
@@ -493,12 +562,12 @@ void debug(){
     //TEntity *object1=&array_objects[1];
     //TEntity *object2=&array_objects[2];
     //TEntity *object3=&array_objects[3];
-    TEntity *enemy=&array_enemies[3];
-    TEntity *shot=&array_shots[0];
+    //TEntity *enemy=&array_enemies[3];
+    //TEntity *shot=&array_shots[0];
     BoxFill (0, 23*8, 256, 210, 6, LOGICAL_IMP );
-    PutText(0,200,Itoa(enemy->plane,"  ",10),8);
-    PutText(50,200,Itoa(shot->plane,"  ",10),8);
-    PutText(100,200,Itoa(sys_entity_get_num_enemies(),"  ",10),8); 
+    PutText(0,200,Itoa(permitirPintarTiles,"  ",10),8);
+    PutText(50,200,Itoa(count_down % 2,"  ",10),8);
+    //PutText(100,200,Itoa(sys_entity_get_num_enemies(),"  ",10),8); 
     //PutText(150,200,Itoa(object3->plane,"  ",10),8); 
     //int valorX=(buffer[0]);
     //int valorY=(buffer[1]);

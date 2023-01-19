@@ -87,6 +87,10 @@
 #define tile_floor_tile 224 //suelo >224
 #define tile_wall 226 //suelo >224
 #define tile_desabled_divan 198 //suelo >224
+#define tile_fire 194
+#define tile_fire2 195
+#define tile_swipe_left 228
+#define tile_swipe_right 229
 
 typedef struct TEntity TEntity;
 struct TEntity{

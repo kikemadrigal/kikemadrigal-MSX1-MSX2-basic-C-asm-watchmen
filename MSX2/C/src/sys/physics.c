@@ -115,6 +115,9 @@ void sys_physics_check_keyboard(TEntity *entity){
         sys_anim_update(entity);
         if(tile_derecha<tile_floor_tile || tile_derecha==tile_empty || tile_derecha==tile_door_right)
             entity->x+=entity->vx;
+        if(tile_derecha==tile_fire || tile_derecha==tile_fire2 ) player_die();
+        else if(tile_abajo==tile_swipe_right) entity->x+=entity->vx/2;
+        else if(tile_abajo==tile_swipe_left) entity->x-=entity->vx/2;
     }
     if(joy==4){
         entity->dir=4;
@@ -124,6 +127,7 @@ void sys_physics_check_keyboard(TEntity *entity){
         entity->dir=5;
         if(tile_abajo==tile_stairs1 ||tile_abajo==tile_stairs2 )
             entity->y+=entity->vy;
+
         sys_anim_update(entity);
         
     }  
@@ -136,6 +140,9 @@ void sys_physics_check_keyboard(TEntity *entity){
         sys_anim_update(entity);
         if(tile_izquierda<tile_floor_tile || tile_izquierda==tile_empty || tile_izquierda==tile_door_left)
             entity->x-=entity->vx; 
+        if(tile_izquierda==tile_fire || tile_izquierda==tile_fire2 ) player_die();
+        else if(tile_abajo==tile_swipe_right) entity->x-=entity->vx/2;
+        else if(tile_abajo==tile_swipe_left) entity->x-=entity->vx/2;
     }
 
 
