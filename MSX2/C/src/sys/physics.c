@@ -46,23 +46,30 @@ void sys_physics_update(TEntity *entity){
         else if(entity->x>=240) entity->x=240;
         //Colision con el margen inferior
         if(entity->y>180) entity->y=212-16;
-          
+        //Colision player con el fuego
+        if(tile_derecha==tile_fire || tile_derecha==tile_fire2 || tile_abajo==tile_fire ||  tile_abajo==tile_fire2 ) player_die();
+        //El player está encima de un desechable
+        if(entity->dir==3 && get_tile_down_left_array(entity)==tile_disposable){
+            Beep();
+            sys_collider_set_tile_down_left_array(entity, 255);
+            man_game_pintarMapa();
+        } 
+        if(entity->dir==7 && get_tile_down_right_array(entity)==tile_disposable){
+            Beep();
+            sys_collider_set_tile_down_right_array(entity, 255);
+            man_game_pintarMapa();
+        }
+     
         //Gravedad, bajará hasta que el tile de debajo sea suelo o escalera
         if (sys_collider_get_tile_down_array(entity)<tile_stairs1 || sys_collider_get_tile_down_array(entity)>=255){
             //Beep();
             entity->y+=entity->vy;
         } 
-
-
-
     }
-    
     else if(entity->type==entity_type_shot){
         if(entity->dir==3) entity->x=entity->x+entity->vx; 
         else if(entity->dir==7) entity->x=entity->x-entity->vx; 
     }
-    
-
 }
 void sys_check_tiled_enviroment(TEntity *player){
     if (sys_collider_get_tile_array(player)==tile_desabled_divan) player->collider=0;
@@ -87,7 +94,7 @@ void sys_physics_check_keyboard(TEntity *entity){
         }
     }
     //Arriba/derecha
-    if(joy==2){
+    if(joy==2 ){
         entity->dir=2;
         sys_anim_update(entity);
         if(tile_derecha<tile_floor_tile || tile_derecha==tile_empty){
@@ -96,10 +103,9 @@ void sys_physics_check_keyboard(TEntity *entity){
         }else{
             entity_jump(entity); 
         }
-    
     }
         //Arriba/izquierda
-    if(joy==8){
+    if(joy==8 ){
         entity->dir=8;
         sys_anim_update(entity);
         if(tile_izquierda<tile_floor_tile || tile_izquierda==tile_empty){
@@ -115,9 +121,8 @@ void sys_physics_check_keyboard(TEntity *entity){
         sys_anim_update(entity);
         if(tile_derecha<tile_floor_tile || tile_derecha==tile_empty || tile_derecha==tile_door_right)
             entity->x+=entity->vx;
-        if(tile_derecha==tile_fire || tile_derecha==tile_fire2 ) player_die();
-        else if(tile_abajo==tile_swipe_right) entity->x+=entity->vx/2;
-        else if(tile_abajo==tile_swipe_left) entity->x-=entity->vx/2;
+        if(tile_abajo==tile_swipe_right) entity->x+=entity->vx*2;
+        else if(tile_abajo==tile_swipe_left) entity->x-=entity->vx-1;//ok
     }
     if(joy==4){
         entity->dir=4;
@@ -127,22 +132,19 @@ void sys_physics_check_keyboard(TEntity *entity){
         entity->dir=5;
         if(tile_abajo==tile_stairs1 ||tile_abajo==tile_stairs2 )
             entity->y+=entity->vy;
-
         sys_anim_update(entity);
-        
     }  
     if(joy==6){
         entity->dir=6;
     }  
     //Movimiento hacia la izquierda
-    if(joy==7) {
+    if(joy==7 ) {
         entity->dir=7;
         sys_anim_update(entity);
         if(tile_izquierda<tile_floor_tile || tile_izquierda==tile_empty || tile_izquierda==tile_door_left)
             entity->x-=entity->vx; 
-        if(tile_izquierda==tile_fire || tile_izquierda==tile_fire2 ) player_die();
-        else if(tile_abajo==tile_swipe_right) entity->x-=entity->vx/2;
-        else if(tile_abajo==tile_swipe_left) entity->x-=entity->vx/2;
+        if(tile_abajo==tile_swipe_right) entity->x+=entity->vx-1;
+        else if(tile_abajo==tile_swipe_left) entity->x-=entity->vx*2;
     }
 
 

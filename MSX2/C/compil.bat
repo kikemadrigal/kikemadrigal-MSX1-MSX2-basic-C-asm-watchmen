@@ -17,18 +17,22 @@ SET program=watchmen
 
 
 rem cogemos los tmx generados con el programa tiled y los pasamos a asm
-java -jar tools\MSXTools\MSXTools.jar -m=a -o=assets\level0.tmx 
+rem java -jar tools\MSXTools\MSXTools.jar -m=a -o=assets\level0.tmx 
 rem java -jar tools\MSXTools\MSXTools.jar -m=a -o=assets\level1.tmx 
 rem java -jar tools\MSXTools\MSXTools.jar -m=a -o=assets\level2.tmx 
 rem java -jar tools\MSXTools\MSXTools.jar -m=a -o=assets\level3.tmx 
 rem java -jar tools\MSXTools\MSXTools.jar -m=a -o=assets\level4.tmx 
+rem java -jar tools\MSXTools\MSXTools.jar -m=a -o=assets\level5.tmx 
+java -jar tools\MSXTools\MSXTools.jar -m=a -o=assets\level6.tmx 
 
 
-move /y assets\level0.asm .\asm  
+rem move /y assets\level0.asm .\asm  
 rem move /y assets\level1.asm .\asm  
 rem move /y assets\level2.asm .\asm  
 rem move /y assets\level3.asm .\asm  
 rem move /y assets\level4.asm .\asm  
+rem move /y assets\level5.asm .\asm  
+move /y assets\level6.asm .\asm  
 
 
 rem sjasm (http://www.xl2s.tk/) es un compilador de ensamblador z80 que puedo convertir tu código ensamblador en los archivos binarios.rom y .bin
@@ -40,26 +44,31 @@ rem start /wait sjasm sprites.asm
 rem call tools\trim\trim.bat sprites.bin 50
 rem start /wait sjasm asm/sprcol.asm
 
-start /wait sjasm asm/level0.asm
+rem start /wait sjasm asm/level0.asm
 rem start /wait sjasm asm/level1.asm
 rem start /wait sjasm asm/level2.asm
 rem start /wait sjasm asm/level3.asm
 rem start /wait sjasm asm/level4.asm
-rem start /wait sjasm asm/e-coord.asm
-rem start /wait sjasm asm/g-coord.asm
-rem start /wait sjasm asm/o-coord.asm
+rem start /wait sjasm asm/level5.asm
+start /wait sjasm asm/level6.asm
+
+start /wait sjasm asm/e-coord.asm
+start /wait sjasm asm/g-coord.asm
+start /wait sjasm asm/o-coord.asm
 
 rem move /y sprites.bin .\dsk
 rem move /y sprcol.bin .\dsk
-move /y level0.bin .\dsk
+rem move /y level0.bin .\dsk
 rem move /y level1.bin .\dsk
 rem move /y level2.bin .\dsk
 rem move /y level3.bin .\dsk
 rem move /y level4.bin .\dsk
+rem move /y level5.bin .\dsk
+move /y level6.bin .\dsk
 
-rem move /y e-coord.bin .\dsk
-rem move /y g-coord.bin .\dsk
-rem move /y o-coord.bin .\dsk
+move /y e-coord.bin .\dsk
+move /y g-coord.bin .\dsk
+move /y o-coord.bin .\dsk
 
 SET INC1=%INCLUDEDIR%crt0_msxdos.rel
 REM SET INC2=%INCLUDEDIR

@@ -13,6 +13,8 @@ int sys_collider_get_tile_right_array(TEntity *entity);
 int sys_collider_get_tile_left_array(TEntity *entity);
 int sys_collider_get_tile_up_array(TEntity *entity);
 int sys_collider_get_tile_down_array(TEntity *entity);
+void sys_collider_set_tile_down_left_array(TEntity *entity,char tile);
+void sys_collider_set_tile_down_right_array(TEntity *entity,char tile);
 int get_tile_down_left_array(TEntity *entity);
 int get_tile_down_right_array(TEntity *entity);
 char sys_collider_entity1_collider_entity(TEntity *entity1, TEntity *entity2);
@@ -61,15 +63,21 @@ int sys_collider_get_tile_down_array(TEntity *entity){
   int tile_abajo=buffer[((sys_collider_get_file_entity(entity)+2)*32)+(sys_collider_get_column_entity(entity))];
   return tile_abajo; 
 }
+
 int get_tile_down_left_array(TEntity *entity){
   int tile_down_left=buffer[((sys_collider_get_file_entity(entity)+2)*32)+(sys_collider_get_column_entity(entity))-1];
   return tile_down_left; 
+}
+void sys_collider_set_tile_down_left_array(TEntity *entity,char tile){
+ buffer[((sys_collider_get_file_entity(entity)+2)*32)+(sys_collider_get_column_entity(entity))-1]=tile;
 }
 int get_tile_down_right_array(TEntity *entity){
   int tile_down_right=buffer[((sys_collider_get_file_entity(entity)+2)*32)+(sys_collider_get_column_entity(entity))+1];
   return tile_down_right; 
 }
-
+void sys_collider_set_tile_down_right_array(TEntity *entity,char tile){
+  buffer[((sys_collider_get_file_entity(entity)+2)*32)+(sys_collider_get_column_entity(entity))+1]=tile;
+}
 
 
 

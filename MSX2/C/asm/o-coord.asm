@@ -7,7 +7,7 @@
 entity_type_object_money equ	#16 
 entity_type_object_divan equ	#32
 INICIO: 
-    ; World 0
+    ; level 0
     ;---------------------------
     ; coordinate_object 0
     db 1*8
@@ -36,7 +36,20 @@ INICIO:
     
     
 
-    ; World 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ; level 1
     ;---------------------------
      ; coordinate_object 0
     db 28*8
@@ -54,8 +67,8 @@ INICIO:
     db entity_type_object_money
     
     ; coordinate_object 3
-    db 15*8
-    db 1*8
+    db 18*8
+    db 5*8
     db entity_type_object_divan
       
     ; coordinate__object 4
@@ -64,7 +77,24 @@ INICIO:
     db entity_type_object_divan
 
 
-    ; World 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ; level 2
     ;---------------------------
 
    ;coordinate_object 0
@@ -73,8 +103,8 @@ INICIO:
     db entity_type_object_money
     
     ;coordinate_object 1
-    db 1*8
-    db 6*8
+    db 7*8
+    db 12*8
     db entity_type_object_money
     
      ;coordinate_object 2
@@ -83,7 +113,7 @@ INICIO:
     db entity_type_object_money
     
     ;coordinate_object 3
-    db  16*8
+    db  15*8
     db  2*8
     db  entity_type_object_divan
       
@@ -93,16 +123,31 @@ INICIO:
     db entity_type_object_divan
 
 
-    ; World 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ; level 3
     ;---------------------------
     
     ;coordinate_object 0
-    db 11*8
+    db 10*8
     db 2*8
     db entity_type_object_money
     
     ;coordinate_object 1
-    db 1*8
+    db 3*8
     db 6*8
     db entity_type_object_money
     
@@ -111,15 +156,133 @@ INICIO:
     db 15*8
     db entity_type_object_money
     
-    ;coordinate_enemy 3
+    ;coordinate_object 3
     db 2*8
     db 26*8
     db entity_type_object_divan
 
-    ;coordinate_enemy 4
+    ;coordinate_object 4
     db 14*8
     db 11*8
     db entity_type_object_divan
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ; level 4
+    ;---------------------------
+    
+    ;coordinate_object 0
+    db 28*8
+    db 2*8
+    db entity_type_object_money
+    
+    ;coordinate_object 1
+    db 29*8
+    db 11*8
+    db entity_type_object_money
+    
+     ;coordinate_object 2
+    db 3*8
+    db 14*8
+    db entity_type_object_money
+    
+    ;coordinate_object 3
+    db 15*8
+    db 2*8
+    db entity_type_object_divan
+
+    ;coordinate_object 4
+    db 8*8
+    db 27*8
+    db entity_type_object_divan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ; level 5
+    ;---------------------------
+    
+    ;coordinate_object 0
+    db 1*8
+    db 2*8
+    db entity_type_object_money
+    
+    ;coordinate_object 1
+    db 29*8
+    db 2*8
+    db entity_type_object_money
+    
+     ;coordinate_object 2
+    db 29*8
+    db 20*8
+    db entity_type_object_money
+    
+    ;coordinate_object 3
+    db 0*8
+    db 27*8
+    db entity_type_object_divan
+
+    ;coordinate_object 4
+    db 0*8
+    db 27*8
+    db entity_type_object_divan
+
+
+
+
+
+
+
+
+
+    ; level 6
+    ;---------------------------
+    
+    ;coordinate_object 0
+    db 2*8
+    db 2*8
+    db entity_type_object_money
+    
+    ;coordinate_object 1
+    db 29*8
+    db 10*8
+    db entity_type_object_money
+    
+     ;coordinate_object 2
+    db 2*8
+    db 15*8
+    db entity_type_object_money
+    
+    ;coordinate_object 3
+    db 0*8
+    db 27*8
+    db entity_type_object_divan
+
+    ;coordinate_object 4
+    db 0*8
+    db 27*8
+    db entity_type_object_divan
+    
     
 FINAL: 
 

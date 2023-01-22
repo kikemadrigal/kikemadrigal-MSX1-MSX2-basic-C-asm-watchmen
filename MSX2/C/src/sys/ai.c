@@ -9,7 +9,7 @@ void sys_ai_init();
 void sys_ai_update(TEntity *entity);
 void sys_ai_update_enemy_behavior_1(TEntity *enemy);
 void sys_ai_update_enemy_behavior_2(TEntity *enemy);
-void sys_ai_update_enemy_boss1(TEntity *enemy);
+void sys_ai_update_enemy_behavior_3(TEntity *enemy);
 int sys_ai_contador;
 TEntity* player;
 
@@ -57,6 +57,10 @@ void sys_ai_update_enemy_behavior_2(TEntity *enemy){
     //Si la distancia vertical es mayor que cero es que el player está abajo
     int vertical_distance=player->y-enemy->y;
     if (enemy->x<8 || enemy->x>256-16) {
+        if(enemy->dir==7) enemy->dir=3;
+        else if(enemy->dir==3) enemy->dir=7;
+    }
+    if (get_tile_down_right_array(enemy)==tile_empty || get_tile_down_left_array(enemy)==tile_empty || sys_collider_get_tile_right_array(enemy)==tile_wall || sys_collider_get_tile_left_array(enemy)==tile_wall) {
         if(enemy->dir==7) enemy->dir=3;
         else if(enemy->dir==3) enemy->dir=7;
     }
@@ -108,23 +112,8 @@ void sys_ai_update_enemy_behavior_2(TEntity *enemy){
 
 
 
-void sys_ai_update_enemy_boss1(TEntity *enemy){
-    ++sys_ai_contador;
-    enemy->old_x=enemy->x;
-    enemy->old_y=enemy->y;
-    char aleatorio=rand()%(6-3)+3;
-    if (sys_ai_contador<=3)enemy->x-=enemy->vx;
-    else if (sys_ai_contador>3)enemy->x+=enemy->vx;
-    if (sys_ai_contador==6) {
-        //enemy->y= rand()%(160-100)+100; 
-        enemy->vy=-enemy->vy ; 
-        sys_ai_contador=0;
-    }
-    if (sys_ai_contador==aleatorio){
-        //man_game_crear_disparo_boss(enemy);
-    }
+void sys_ai_update_enemy_behavior_3(TEntity *enemy){
 
-    enemy->y+=enemy->vy ;
 
 }
 

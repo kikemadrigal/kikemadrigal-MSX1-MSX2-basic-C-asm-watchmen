@@ -117,15 +117,7 @@ void man_game_init(){
     array_objects=sys_entity_get_array_structs_objects();
     array_shots=sys_entity_get_array_structs_shots();
     //le decimos que no hemos creado el 2 enemigo hasta que el tiempo sea menor que 100
-    created_enemy2=0;
-
-    
-  
-
-    
-
-
-    
+    created_enemy2=0;    
 }
 
 void man_game_play(){
@@ -275,23 +267,28 @@ void man_game_play(){
 
 
 
-
 void player_die(){
     //Muchas veces se queda alguna tecla a medio y hace cosas raras
-    KillKeyBuffer();
+ 
+    //BoxFill (70,70, 150, 140, 0, LOGICAL_IMP );
+    //PutText(20,192,"Tan matao, pulsa una tecla",8);
+    //WaitKey();
     SetRealTimer(0);
     //Hacemos una pausa
     for (int i=0;i<30000;i++);
     player->lives-=1;
     player->collider=0;
+    player->jump=0;
+    player->dir=3;
+    sys_physics_update(player);
     man_game_reproducir_efecto_sonido(2);
+    KillKeyBuffer();
     //recolocamos a los enemigos
     world_change=1;
     if(player->lives<=0){
         game_over=1;
         SpriteOff();
     }
-    
     pintar_HUD();
 }
 
@@ -375,8 +372,17 @@ void man_game_update(){
             case 4:
                 actual_world_string="level4.bin";
                 break;
-            default:
+            case 5:
                 actual_world_string="level5.bin";
+                break;
+            case 6:
+                actual_world_string="level6.bin";
+                break;
+            case 7:
+                actual_world_string="level7.bin";
+                break;
+            default:
+                actual_world_string="level0.bin";
                 break;
         }
         //cargamos el mapa en un array, es decir en una posición de la memoria "Buffer"
@@ -562,11 +568,11 @@ void debug(){
     //TEntity *object1=&array_objects[1];
     //TEntity *object2=&array_objects[2];
     //TEntity *object3=&array_objects[3];
-    //TEntity *enemy=&array_enemies[3];
+    TEntity *enemy=&array_enemies[3];
     //TEntity *shot=&array_shots[0];
     BoxFill (0, 23*8, 256, 210, 6, LOGICAL_IMP );
-    PutText(0,200,Itoa(permitirPintarTiles,"  ",10),8);
-    PutText(50,200,Itoa(count_down % 2,"  ",10),8);
+    PutText(0,200,Itoa(sys_collider_get_tile_down_array(player),"  ",10),8);
+    //PutText(50,200,Itoa(count_down % 2,"  ",10),8);
     //PutText(100,200,Itoa(sys_entity_get_num_enemies(),"  ",10),8); 
     //PutText(150,200,Itoa(object3->plane,"  ",10),8); 
     //int valorX=(buffer[0]);
@@ -630,4 +636,5 @@ void show_menu_screen(){
     world_change=1;
     //Inicializamos la variable game_over
     game_over=0;
+    player->lives=5;
 }
