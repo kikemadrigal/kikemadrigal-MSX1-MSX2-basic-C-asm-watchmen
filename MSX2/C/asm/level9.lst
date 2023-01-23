@@ -1,0 +1,105 @@
+Sjasm Z80 Assembler v0.42c - www.xl2s.tk             [2023.01.23 - 08:13:14]
+
+asm/level9.asm
+Errors: 0
+
+       1   00:0000                      		 output level9.bin
+       2   00:D000  FE                  	db   #fe
+       3   00:D001  00 D0               	dw   INICIO 
+       4   00:D003  E0 D2               	dw   FINAL
+       5   00:D005  00 D0               	dw   INICIO 
+       6   00:D007                      	org  #d000 
+       7   00:D000                      INICIO: 
+       8   00:D000                      	db 235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235
+       8   00:D000  EB EB EB EB EB EB EB EB EB EB EB EB EB EB EB EB 
+       8   00:D010  EB EB EB EB EB EB EB EB EB EB EB EB EB EB EB EB 
+       9   00:D020                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+       9   00:D020  EB FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+       9   00:D030  FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      10   00:D040                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      10   00:D040  EB FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      10   00:D050  FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      11   00:D060                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      11   00:D060  EB FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      11   00:D070  FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      12   00:D080                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      12   00:D080  EB FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      12   00:D090  FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      13   00:D0A0                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,225,225,225,225,225,225,225,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      13   00:D0A0  EB FF FF FF FF FF FF FF FF FF FF FF FF E1 E1 E1 
+      13   00:D0B0  E1 E1 E1 E1 FF FF FF FF FF FF FF FF FF FF FF EB 
+      14   00:D0C0                      	db 235,-1,-1,-1,-1,-1,-1,225,225,225,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,225,225,225,-1,-1,-1,-1,235
+      14   00:D0C0  EB FF FF FF FF FF FF E1 E1 E1 FF FF FF FF FF FF 
+      14   00:D0D0  FF FF FF FF FF FF FF FF E1 E1 E1 FF FF FF FF EB 
+      15   00:D0E0                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      15   00:D0E0  EB FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      15   00:D0F0  FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      16   00:D100                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      16   00:D100  EB FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      16   00:D110  FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      17   00:D120                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,225,225,225,225,-1,235
+      17   00:D120  EB FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      17   00:D130  FF FF FF FF FF FF FF FF FF FF E1 E1 E1 E1 FF EB 
+      18   00:D140                      	db 235,-1,-1,225,225,225,225,-1,-1,225,225,225,225,225,-1,-1,-1,-1,225,225,225,225,225,-1,-1,-1,-1,-1,-1,-1,-1,235
+      18   00:D140  EB FF FF E1 E1 E1 E1 FF FF E1 E1 E1 E1 E1 FF FF 
+      18   00:D150  FF FF E1 E1 E1 E1 E1 FF FF FF FF FF FF FF FF EB 
+      19   00:D160                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,225,-1,-1,-1,-1,225,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      19   00:D160  EB FF FF FF FF FF FF FF FF FF FF FF FF E1 FF FF 
+      19   00:D170  FF FF E1 FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      20   00:D180                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      20   00:D180  EB FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      20   00:D190  FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      21   00:D1A0                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,225,225,225,225,225,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      21   00:D1A0  EB FF FF FF FF FF FF FF FF FF FF FF FF FF E1 E1 
+      21   00:D1B0  E1 E1 E1 FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      22   00:D1C0                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      22   00:D1C0  EB FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      22   00:D1D0  FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      23   00:D1E0                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      23   00:D1E0  EB FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      23   00:D1F0  FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      24   00:D200                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,225,225,225,225,-1,-1,-1,-1,-1,225,225,225,225,225,-1,-1,-1,-1,-1,-1,235
+      24   00:D200  EB FF FF FF FF FF FF FF FF FF FF E1 E1 E1 E1 FF 
+      24   00:D210  FF FF FF FF E1 E1 E1 E1 E1 FF FF FF FF FF FF EB 
+      25   00:D220                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      25   00:D220  EB FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      25   00:D230  FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      26   00:D240                      	db 235,-1,-1,225,225,225,225,225,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,225,225,225,225,-1,-1,235
+      26   00:D240  EB FF FF E1 E1 E1 E1 E1 FF FF FF FF FF FF FF FF 
+      26   00:D250  FF FF FF FF FF FF FF FF FF E1 E1 E1 E1 FF FF EB 
+      27   00:D260                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      27   00:D260  EB FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      27   00:D270  FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      28   00:D280                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      28   00:D280  EB FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      28   00:D290  FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      29   00:D2A0                      	db 235,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,235
+      29   00:D2A0  EB FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      29   00:D2B0  FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF EB 
+      30   00:D2C0                      	db 235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235,235
+      30   00:D2C0  EB EB EB EB EB EB EB EB EB EB EB EB EB EB EB EB 
+      30   00:D2D0  EB EB EB EB EB EB EB EB EB EB EB EB EB EB EB EB 
+      31   00:D2E0                      FINAL: 
+
+    LABELS
+-------------------------------------------------
+00:0000D000   INICIO
+00:0000D2E0   FINAL
+
+
+ Output: asm/level9.out
+-------------------------------------------------
+
+ Page: 00
+  Org: 0000D000  Size: *  Used: 00000000
+
+    No output
+
+ Output: level9.bin
+-------------------------------------------------
+
+ Page: 00
+  Org: 0000D000  Size: *  Used: 000002E7
+
+   Address   Length Align   Label
+   0000D000     743         INICIO

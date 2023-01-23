@@ -92,10 +92,7 @@ void sys_ai_update_enemy_behavior_2(TEntity *enemy){
         if(sys_collider_get_tile_down_array(enemy)>=tile_floor_tile){
             if(horizontal_distance>0) enemy->dir=3;
             else enemy->dir=7;
-           //enemy->dir=3;
-        }
-        //else if (sys_collider_get_tile_array(enemy)==tile_stairs1)enemy->dir=7;
-       
+        } 
     }
 
 

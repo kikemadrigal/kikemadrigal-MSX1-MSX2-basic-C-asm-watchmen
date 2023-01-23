@@ -268,11 +268,7 @@ void man_game_play(){
 
 
 void player_die(){
-    //Muchas veces se queda alguna tecla a medio y hace cosas raras
- 
-    //BoxFill (70,70, 150, 140, 0, LOGICAL_IMP );
-    //PutText(20,192,"Tan matao, pulsa una tecla",8);
-    //WaitKey();
+    
     SetRealTimer(0);
     //Hacemos una pausa
     for (int i=0;i<30000;i++);
@@ -283,13 +279,14 @@ void player_die(){
     sys_physics_update(player);
     man_game_reproducir_efecto_sonido(2);
     KillKeyBuffer();
-    //recolocamos a los enemigos
+
     world_change=1;
     if(player->lives<=0){
         game_over=1;
         SpriteOff();
     }
     pintar_HUD();
+    
 }
 
 
@@ -354,10 +351,14 @@ void man_game_update(){
         destiny_x_phone=buffer[numWorld+4];
         destiny_y_phone=buffer[numWorld+5];
 
+        SpriteOff();
         //Seleccionamos el archivo a cargar el mapa
         switch (actual_world)
         {
             case 0:
+                HMMM(0,72+256, 100,40,70,70);
+                PutText(30,100,"Level 1: Dinosaur room\n",8);
+                WaitKey();
                 actual_world_string="level0.bin";
                 break;
             case 1:
@@ -370,6 +371,9 @@ void man_game_update(){
                 actual_world_string="level3.bin";
                 break;
             case 4:
+                HMMM(68,68+256, 100,40,40,70);
+                PutText(30,120,"Level 2: Statues room",8);
+                WaitKey();
                 actual_world_string="level4.bin";
                 break;
             case 5:
@@ -381,10 +385,31 @@ void man_game_update(){
             case 7:
                 actual_world_string="level7.bin";
                 break;
+            case 8:
+                HMMM(110,68+256, 100,40,100,60);
+                PutText(30,120,"Level 3: Science room",8);
+                WaitKey();
+                actual_world_string="level8.bin";
+                break;
+            case 9:
+                actual_world_string="level9.bin";
+                break;
+            case 10:
+                actual_world_string="level10.bin";
+                break;
+            case 11:
+                PutText(30,100,"Final, has protegido el museo",8);
+                HMMM(14*8,256+(16*8),8*8,12*8,144,48);
+                WaitKey();
+                actual_world=0;
+                player->lives=1;
+                player_die();
             default:
-                actual_world_string="level0.bin";
+                actual_world_string="level11.bin";
                 break;
         }
+        
+
         //cargamos el mapa en un array, es decir en una posición de la memoria "Buffer"
         load_file_into_buffer_with_structure(actual_world_string);
         //Pintamos en la pantalla según los datas
@@ -398,6 +423,8 @@ void man_game_update(){
         //Pintamos la puntuacón una vez que hemos creado el numEnmeies
         pintar_HUD();
         SetRealTimer(0);
+        SpriteOn();
+        
         //PutText(0,0,Itoa(player->plane,"  ",10),8);
         //PutText(20,0,Itoa(array_enemies[0].plane,"  ",10),8);
         //PutText(80,0,Itoa(divan1_plane,"  ",10),8);
@@ -607,14 +634,14 @@ void pintar_HUD(){
     //Copiamos las monedas
     HMMM(3*8,256,19*8,23*8,16,16);
     //Copiamos la flecha de las monedas
-    HMMM(6*8,256+(2*8),21*8,24*8,8,8);
+    //HMMM(6*8,256+(2*8),21*8,24*8,8,8);
 
     PutText(20,192,Itoa(actual_world+1," ",10),8);
     PutText(60,192,Itoa(player->lives," ",10),8);
     //Dibujamos los capturados
     HMMM(8*8,256+(3*8),15*8,23*8,16,16);
     PutText(140,192,Itoa(sys_entity_get_num_enemies()," ",10),8);
-    PutText(180,192,Itoa(sys_entity_get_num_moneys()," ",10),8);    
+    PutText(172,192,Itoa(sys_entity_get_num_moneys()," ",10),8);    
 }
 
 void show_menu_screen(){
@@ -622,14 +649,22 @@ void show_menu_screen(){
     KillKeyBuffer();
     PutText(80,0, "The watchmen",0);
     PutText(0,16, "Eres un vigilante y como siempre estas durmiendo te han robado.",0);
-    PutText(0,32, "Recoge las monedas que han ido perdiendo, atrapa a los ladrones por la espalda",0);
-    PutText(0,56, "Puedes esconderte en los divanes",0);
-    HMMM(14*8,256+(16*8),8*8,12*8,144,48);
+    PutText(0,42, "Recoge las monedas que han ido perdiendo, atrapa a los ladrones por la espalda.",0);
+    HMMM(80,256,8,76,16,16);
+    PutText(40,76, "Escondete en los biombos",0);
+    HMMM(64,256+48,8,96,16,8);
+    PutText(40,96, "El fuego te mata",0);
+    HMMM(200,256+56,8,116,16,8);
+    PutText(40,116, "Este suelo se deshace",0);
+    HMMM(168,256+56,8,136,16,8);
+    PutText(40,136, "Esto te hace ir mas rapido o mas lento, tambien te puede    bloquear",0);
+
+    //HMMM(14*8,256+(16*8),8*8,12*8,144,48);
     PutText(20,180, "Press any key to continue",0);
     WaitForKey();
     SpriteOn();
     //le ponemos que el mundo actual sea el 0
-    actual_world=0;
+    actual_world=11;
     //Le ponemos que aplique que el mapa ha cambiado para que ponga
     // los objetos, enemigos y la posición del player del mundo correspondiente
     // Esto se aplica en el método man_game_update

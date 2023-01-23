@@ -82,16 +82,16 @@
 //Solids
 #define tile_stairs1 192 // escalera
 #define tile_stairs2 193 // escalera
-#define tile_door_left 228 // muro que te deja pasar a la izquierda
-#define tile_door_right 229 // escalera
+//#define tile_door_left 228 // muro que te deja pasar a la izquierda
+//#define tile_door_right 229 // escalera
 #define tile_floor_tile 224 //suelo >224
 #define tile_wall 226 //suelo >224
 #define tile_desabled_divan 168 //suelo >224
-#define tile_fire 194
-#define tile_fire2 195
-#define tile_disposable 232
-#define tile_swipe_left 228
-#define tile_swipe_right 229
+#define tile_fire 200
+#define tile_fire2 201
+#define tile_disposable 249
+#define tile_swipe_left 245
+#define tile_swipe_right 246
 
 typedef struct TEntity TEntity;
 struct TEntity{
@@ -109,6 +109,11 @@ struct TEntity{
     unsigned int lives;
     unsigned char collider;
 };
+typedef struct TTile TTile;
+struct TTile{
+    unsigned char x;
+    unsigned char y;
+};
 
 #define MAX_enemies 4
 #define MAX_shots 1
@@ -119,6 +124,8 @@ TEntity array_structs_objects[MAX_objects];
 char num_enemies;
 char num_shots;
 char num_objects;
+
+
 
 //Functions
 void sys_entities_init();
@@ -215,6 +222,7 @@ const TEntity shot_template={
 
 
 
+
 //Life cicle
 void sys_entities_init(){
     //Ponemos a 0 todos los valores del array de estructuras
@@ -222,6 +230,7 @@ void sys_entities_init(){
     memset(array_structs_enemies,0,sizeof(array_structs_enemies) );
     memset(array_structs_objects,0,sizeof(array_structs_objects) );
     memset(array_structs_shots,0,sizeof(array_structs_shots) );
+
     num_enemies=0;
     num_objects=0;
     num_shots=0;

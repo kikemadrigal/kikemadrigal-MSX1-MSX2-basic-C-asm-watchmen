@@ -8,7 +8,7 @@ INICIO:
     ;level  0
 	db 1*8,19*8   ;Player initial position x, y
     db 29*8,2*8   ;door position x, y
-    db 0,15*8     ;Phone position x, y 
+    db 1*8,15*8     ;Phone position x, y 
     ;level 1
     db  4*8,20*8
     db 2*8,4*8

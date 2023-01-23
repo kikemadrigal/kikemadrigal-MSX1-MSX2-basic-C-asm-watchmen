@@ -1,4 +1,4 @@
-Sjasm Z80 Assembler v0.42c - www.xl2s.tk             [2023.01.22 - 08:08:24]
+Sjasm Z80 Assembler v0.42c - www.xl2s.tk             [2023.01.23 - 08:16:47]
 
 asm/o-coord.asm
 Errors: 0
@@ -124,7 +124,7 @@ Errors: 0
      119   00:D02A                            
      120   00:D02A                          ;coordinate_object 4
      121   00:D02A  18                      db 3*8
-     122   00:D02B  D8                      db 27*8
+     122   00:D02B  E0                      db 28*8
      123   00:D02C  32                      db entity_type_object_divan
      124   00:D02D                      
      125   00:D02D                      
@@ -163,7 +163,7 @@ Errors: 0
      158   00:D036                          
      159   00:D036                          ;coordinate_object 3
      160   00:D036  10                      db 2*8
-     161   00:D037  D0                      db 26*8
+     161   00:D037  E0                      db 28*8
      162   00:D038  32                      db entity_type_object_divan
      163   00:D039                      
      164   00:D039                          ;coordinate_object 4

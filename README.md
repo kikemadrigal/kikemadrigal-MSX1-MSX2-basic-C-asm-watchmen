@@ -15,7 +15,7 @@ He uilizado el famoso gran programa de MSX Spain "MSX tools":
 
 <img src=images/sprite1.PNG width=500px/>
 <img src=images/sprite2.PNG width=500px/>
-<img src=images/sprite3.PNG width=500px/>
+<img src=images/sprite3.PNG width=500px/> 
 <img src=images/sprite4.PNG width=240px/>
 
 ### Tiled sheet
@@ -32,25 +32,61 @@ Menu
 
 <img src=images/MSX2-C-MENU.PNG width=500px/>
 
-Level 1
+Screen 1
+
+<img src=images/MSX2-C-LEVEL1.PNG width=500px/>
+
 
 <img src=images/MSX2-C-0.PNG width=500px/>
 
-Level 2
+Screen 2
 
 <img src=images/MSX2-C-1.PNG width=500px/>
 
-Level 3
+Screen 3
 
 <img src=images/MSX2-C-2.PNG width=500px/>
 
-Level 4
+Screen 4
+
+<img src=images/MSX2-C-LEVEL2.PNG width=500px/>
 
 <img src=images/MSX2-C-3.PNG width=500px/>
 
-Level 5
+Screen 5
 
-<img src=images/MSX2-C-4.PNG width=300px/>
+<img src=images/MSX2-C-4.PNG width=500px/>
+
+Screen 6
+
+<img src=images/MSX2-C-5.PNG width=500px/>
+
+Screen 7
+
+<img src=images/MSX2-C-LEVEL3.PNG width=500px/>
+
+<img src=images/MSX2-C-6.PNG width=500px/>
+
+Screen 8
+
+<img src=images/MSX2-C-7.PNG width=500px/>
+
+Screen 9
+
+
+<img src=images/MSX2-C-8.PNG width=500px/>
+
+Screen 10
+
+<img src=images/MSX2-C-9.PNG width=500px/>
+
+Screen 11
+
+<img src=images/MSX2-C-10.PNG width=500px/>
+
+Screen final
+
+<img src=images/MSX2-C-FINAL.PNG width=500px/>
 
 
 #### Basic 

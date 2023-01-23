@@ -119,7 +119,7 @@ INICIO:
       
     ;coordinate_object 4
     db 3*8
-    db 27*8
+    db 28*8
     db entity_type_object_divan
 
 
@@ -158,7 +158,7 @@ INICIO:
     
     ;coordinate_object 3
     db 2*8
-    db 26*8
+    db 28*8
     db entity_type_object_divan
 
     ;coordinate_object 4

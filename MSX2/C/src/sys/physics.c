@@ -5,7 +5,8 @@
 #include "../../src/sys/collider.c"
 ////Para el man_game_reproducir_efecto_sonido y man_game_crear_disparo()
 #include "../../src/man/game.c"
-
+//Para el boxfill
+#include "../../fusion-c/header/vdp_graph2.h"
 
 
 //Declarations
@@ -52,12 +53,15 @@ void sys_physics_update(TEntity *entity){
         if(entity->dir==3 && get_tile_down_left_array(entity)==tile_disposable){
             Beep();
             sys_collider_set_tile_down_left_array(entity, 255);
-            man_game_pintarMapa();
+            BoxFill ((entity->x-entity->vx), entity->y+16, (entity->x-entity->vx)+8, (entity->y+16)+8, 15,LOGICAL_IMP );
+            //PutText(0,200,Itoa(tile->x,"     ",10),8);
+
+
         } 
         if(entity->dir==7 && get_tile_down_right_array(entity)==tile_disposable){
             Beep();
             sys_collider_set_tile_down_right_array(entity, 255);
-            man_game_pintarMapa();
+            BoxFill ((entity->x+entity->vx*2), entity->y+16, (entity->x+entity->vx*2)+8, (entity->y+16)+8, 15,LOGICAL_IMP );
         }
      
         //Gravedad, bajará hasta que el tile de debajo sea suelo o escalera
@@ -97,7 +101,7 @@ void sys_physics_check_keyboard(TEntity *entity){
     if(joy==2 ){
         entity->dir=2;
         sys_anim_update(entity);
-        if(tile_derecha<tile_floor_tile || tile_derecha==tile_empty){
+        if(tile_derecha<tile_floor_tile || tile_derecha==tile_empty || tile_derecha==tile_swipe_right){
             entity->x+=entity->vx;
             entity_jump(entity); 
         }else{
@@ -108,7 +112,7 @@ void sys_physics_check_keyboard(TEntity *entity){
     if(joy==8 ){
         entity->dir=8;
         sys_anim_update(entity);
-        if(tile_izquierda<tile_floor_tile || tile_izquierda==tile_empty){
+        if(tile_izquierda<tile_floor_tile || tile_izquierda==tile_empty || tile_izquierda==tile_swipe_left){
             entity_jump(entity);
             entity->x-=entity->vx; 
         }else{
@@ -119,7 +123,7 @@ void sys_physics_check_keyboard(TEntity *entity){
     if(joy==3){
         entity->dir=3;
         sys_anim_update(entity);
-        if(tile_derecha<tile_floor_tile || tile_derecha==tile_empty || tile_derecha==tile_door_right)
+        if(tile_derecha<tile_floor_tile || tile_derecha==tile_empty || tile_derecha==tile_swipe_right)
             entity->x+=entity->vx;
         if(tile_abajo==tile_swipe_right) entity->x+=entity->vx*2;
         else if(tile_abajo==tile_swipe_left) entity->x-=entity->vx-1;//ok
@@ -141,7 +145,7 @@ void sys_physics_check_keyboard(TEntity *entity){
     if(joy==7 ) {
         entity->dir=7;
         sys_anim_update(entity);
-        if(tile_izquierda<tile_floor_tile || tile_izquierda==tile_empty || tile_izquierda==tile_door_left)
+        if(tile_izquierda<tile_floor_tile || tile_izquierda==tile_empty || tile_izquierda==tile_swipe_left)
             entity->x-=entity->vx; 
         if(tile_abajo==tile_swipe_right) entity->x+=entity->vx-1;
         else if(tile_abajo==tile_swipe_left) entity->x-=entity->vx*2;

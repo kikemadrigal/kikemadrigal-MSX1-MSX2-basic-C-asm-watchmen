@@ -1,0 +1,105 @@
+Sjasm Z80 Assembler v0.42c - www.xl2s.tk             [2023.01.23 - 08:16:47]
+
+asm/level10.asm
+Errors: 0
+
+       1   00:0000                      		 output level10.bin
+       2   00:D000  FE                  	db   #fe
+       3   00:D001  00 D0               	dw   INICIO 
+       4   00:D003  E0 D2               	dw   FINAL
+       5   00:D005  00 D0               	dw   INICIO 
+       6   00:D007                      	org  #d000 
+       7   00:D000                      INICIO: 
+       8   00:D000                      	db 239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239
+       8   00:D000  EF EF EF EF EF EF EF EF EF EF EF EF EF EF EF EF 
+       8   00:D010  EF EF EF EF EF EF EF EF EF EF EF EF EF EF EF EF 
+       9   00:D020                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,239,239
+       9   00:D020  EF EF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+       9   00:D030  FF FF FF FF FF FF FF FF FF FF FF FF FF FF EF EF 
+      10   00:D040                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,239,239
+      10   00:D040  EF EF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      10   00:D050  FF FF FF FF FF FF FF FF FF FF FF FF FF FF EF EF 
+      11   00:D060                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,239,239
+      11   00:D060  EF EF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      11   00:D070  FF FF FF FF FF FF FF FF FF FF FF FF FF FF EF EF 
+      12   00:D080                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,239,239
+      12   00:D080  EF EF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      12   00:D090  FF FF FF FF FF FF FF FF FF FF FF FF FF FF EF EF 
+      13   00:D0A0                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,239,239
+      13   00:D0A0  EF EF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      13   00:D0B0  FF FF FF FF FF FF FF FF FF FF FF FF FF FF EF EF 
+      14   00:D0C0                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,239,239
+      14   00:D0C0  EF EF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      14   00:D0D0  FF FF FF FF FF FF FF FF FF FF FF FF FF FF EF EF 
+      15   00:D0E0                      	db 239,239,-1,-1,228,228,228,228,228,228,228,228,228,-1,-1,-1,-1,-1,-1,228,228,228,228,228,228,228,228,-1,-1,-1,239,239
+      15   00:D0E0  EF EF FF FF E4 E4 E4 E4 E4 E4 E4 E4 E4 FF FF FF 
+      15   00:D0F0  FF FF FF E4 E4 E4 E4 E4 E4 E4 E4 FF FF FF EF EF 
+      16   00:D100                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,239,239
+      16   00:D100  EF EF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 
+      16   00:D110  FF FF FF FF FF FF FF FF FF FF FF FF FF FF EF EF 
+      17   00:D120                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,228,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,228,-1,-1,-1,-1,-1,-1,-1,239,239
+      17   00:D120  EF EF FF FF FF FF FF FF FF E4 FF FF FF FF FF FF 
+      17   00:D130  FF FF FF FF FF FF E4 FF FF FF FF FF FF FF EF EF 
+      18   00:D140                      	db 239,239,-1,228,228,228,-1,-1,-1,-1,228,-1,-1,-1,-1,228,228,228,-1,-1,-1,228,-1,-1,-1,-1,228,228,228,-1,239,239
+      18   00:D140  EF EF FF E4 E4 E4 FF FF FF FF E4 FF FF FF FF E4 
+      18   00:D150  E4 E4 FF FF FF E4 FF FF FF FF E4 E4 E4 FF EF EF 
+      19   00:D160                      	db 239,239,-1,-1,-1,228,-1,-1,-1,-1,-1,228,-1,-1,-1,-1,-1,-1,-1,-1,228,-1,-1,-1,-1,-1,228,-1,-1,-1,239,239
+      19   00:D160  EF EF FF FF FF E4 FF FF FF FF FF E4 FF FF FF FF 
+      19   00:D170  FF FF FF FF E4 FF FF FF FF FF E4 FF FF FF EF EF 
+      20   00:D180                      	db 239,239,-1,-1,-1,228,-1,-1,-1,-1,-1,228,228,-1,-1,-1,-1,-1,-1,228,-1,-1,-1,-1,-1,-1,228,-1,-1,-1,239,239
+      20   00:D180  EF EF FF FF FF E4 FF FF FF FF FF E4 E4 FF FF FF 
+      20   00:D190  FF FF FF E4 FF FF FF FF FF FF E4 FF FF FF EF EF 
+      21   00:D1A0                      	db 239,239,-1,-1,-1,228,-1,-1,-1,-1,-1,-1,-1,228,-1,-1,-1,-1,228,-1,-1,-1,-1,-1,-1,-1,228,-1,-1,-1,239,239
+      21   00:D1A0  EF EF FF FF FF E4 FF FF FF FF FF FF FF E4 FF FF 
+      21   00:D1B0  FF FF E4 FF FF FF FF FF FF FF E4 FF FF FF EF EF 
+      22   00:D1C0                      	db 239,239,-1,-1,-1,228,228,228,228,228,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,228,228,228,228,228,-1,-1,-1,239,239
+      22   00:D1C0  EF EF FF FF FF E4 E4 E4 E4 E4 FF FF FF FF FF FF 
+      22   00:D1D0  FF FF FF FF FF FF E4 E4 E4 E4 E4 FF FF FF EF EF 
+      23   00:D1E0                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,228,-1,-1,-1,-1,228,228,228,228,-1,-1,-1,-1,228,-1,-1,-1,-1,-1,-1,-1,239,239
+      23   00:D1E0  EF EF FF FF FF FF FF FF FF E4 FF FF FF FF E4 E4 
+      23   00:D1F0  E4 E4 FF FF FF FF E4 FF FF FF FF FF FF FF EF EF 
+      24   00:D200                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,228,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,228,-1,-1,-1,-1,-1,-1,-1,239,239
+      24   00:D200  EF EF FF FF FF FF FF FF FF E4 FF FF FF FF FF FF 
+      24   00:D210  FF FF FF FF FF FF E4 FF FF FF FF FF FF FF EF EF 
+      25   00:D220                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,228,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,228,-1,-1,-1,-1,-1,-1,-1,239,239
+      25   00:D220  EF EF FF FF FF FF FF FF FF E4 FF FF FF FF FF FF 
+      25   00:D230  FF FF FF FF FF FF E4 FF FF FF FF FF FF FF EF EF 
+      26   00:D240                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,228,228,228,228,228,228,-1,-1,228,228,228,228,228,228,-1,-1,-1,-1,-1,-1,-1,239,239
+      26   00:D240  EF EF FF FF FF FF FF FF FF E4 E4 E4 E4 E4 E4 FF 
+      26   00:D250  FF E4 E4 E4 E4 E4 E4 FF FF FF FF FF FF FF EF EF 
+      27   00:D260                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,228,-1,-1,228,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,239,239
+      27   00:D260  EF EF FF FF FF FF FF FF FF FF FF FF FF FF E4 FF 
+      27   00:D270  FF E4 FF FF FF FF FF FF FF FF FF FF FF FF EF EF 
+      28   00:D280                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,228,-1,-1,228,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,239,239
+      28   00:D280  EF EF FF FF FF FF FF FF FF FF FF FF FF FF E4 FF 
+      28   00:D290  FF E4 FF FF FF FF FF FF FF FF FF FF FF FF EF EF 
+      29   00:D2A0                      	db 239,239,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,228,-1,-1,228,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,239,239
+      29   00:D2A0  EF EF FF FF FF FF FF FF FF FF FF FF FF FF E4 FF 
+      29   00:D2B0  FF E4 FF FF FF FF FF FF FF FF FF FF FF FF EF EF 
+      30   00:D2C0                      	db 239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239
+      30   00:D2C0  EF EF EF EF EF EF EF EF EF EF EF EF EF EF EF EF 
+      30   00:D2D0  EF EF EF EF EF EF EF EF EF EF EF EF EF EF EF EF 
+      31   00:D2E0                      FINAL: 
+
+    LABELS
+-------------------------------------------------
+00:0000D000   INICIO
+00:0000D2E0   FINAL
+
+
+ Output: asm/level10.out
+-------------------------------------------------
+
+ Page: 00
+  Org: 0000D000  Size: *  Used: 00000000
+
+    No output
+
+ Output: level10.bin
+-------------------------------------------------
+
+ Page: 00
+  Org: 0000D000  Size: *  Used: 000002E7
+
+   Address   Length Align   Label
+   0000D000     743         INICIO

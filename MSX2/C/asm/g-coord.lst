@@ -1,4 +1,4 @@
-Sjasm Z80 Assembler v0.42c - www.xl2s.tk             [2023.01.22 - 08:08:24]
+Sjasm Z80 Assembler v0.42c - www.xl2s.tk             [2023.01.23 - 08:16:47]
 
 asm/g-coord.asm
 Errors: 0
@@ -13,7 +13,7 @@ Errors: 0
        8   00:D000                          ;level  0
        9   00:D000  08 98               	db 1*8,19*8   ;Player initial position x, y
       10   00:D002  E8 10                   db 29*8,2*8   ;door position x, y
-      11   00:D004  00 78                   db 0,15*8     ;Phone position x, y 
+      11   00:D004  08 78                   db 1*8,15*8     ;Phone position x, y 
       12   00:D006                          ;level 1
       13   00:D006  20 A0                   db  4*8,20*8
       14   00:D008  10 20                   db 2*8,4*8

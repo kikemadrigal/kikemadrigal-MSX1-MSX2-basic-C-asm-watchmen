@@ -69,7 +69,7 @@ int get_tile_down_left_array(TEntity *entity){
   return tile_down_left; 
 }
 void sys_collider_set_tile_down_left_array(TEntity *entity,char tile){
- buffer[((sys_collider_get_file_entity(entity)+2)*32)+(sys_collider_get_column_entity(entity))-1]=tile;
+  buffer[((sys_collider_get_file_entity(entity)+2)*32)+(sys_collider_get_column_entity(entity))-1]=tile;
 }
 int get_tile_down_right_array(TEntity *entity){
   int tile_down_right=buffer[((sys_collider_get_file_entity(entity)+2)*32)+(sys_collider_get_column_entity(entity))+1];
@@ -77,6 +77,8 @@ int get_tile_down_right_array(TEntity *entity){
 }
 void sys_collider_set_tile_down_right_array(TEntity *entity,char tile){
   buffer[((sys_collider_get_file_entity(entity)+2)*32)+(sys_collider_get_column_entity(entity))+1]=tile;
+
+
 }
 
 
