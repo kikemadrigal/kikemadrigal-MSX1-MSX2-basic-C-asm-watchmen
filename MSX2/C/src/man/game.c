@@ -14,6 +14,8 @@
 
 
 
+
+
 void man_game_init();
 void man_game_play();
 void man_game_update();
@@ -68,7 +70,6 @@ char permitirPintarTiles;
 TEntity* array_enemies;
 TEntity* array_objects;
 TEntity* array_shots;
-
 
 
 
@@ -352,7 +353,10 @@ void man_game_update(){
         destiny_y_phone=buffer[numWorld+5];
 
         SpriteOff();
+
         //Seleccionamos el archivo a cargar el mapa
+        
+ 
         switch (actual_world)
         {
             case 0:
@@ -598,7 +602,8 @@ void debug(){
     TEntity *enemy=&array_enemies[3];
     //TEntity *shot=&array_shots[0];
     BoxFill (0, 23*8, 256, 210, 6, LOGICAL_IMP );
-    PutText(0,200,Itoa(sys_collider_get_tile_down_array(player),"  ",10),8);
+    //PutText(30,200,actual_world_string,20);
+    //PutText(0,200,Itoa(sys_collider_get_tile_down_array(player),"  ",10),8);
     //PutText(50,200,Itoa(count_down % 2,"  ",10),8);
     //PutText(100,200,Itoa(sys_entity_get_num_enemies(),"  ",10),8); 
     //PutText(150,200,Itoa(object3->plane,"  ",10),8); 

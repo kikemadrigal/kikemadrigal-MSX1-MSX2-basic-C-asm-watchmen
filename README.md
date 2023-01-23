@@ -24,18 +24,19 @@ He uilizado el famoso gran programa de MSX Spain "MSX tools":
 
 ### Maps
  
-Loading screen 
+#### Loading screen 
 
 <img src=images/MSX2-C.PNG width=500px/>
 
-Menu
+#### Menu
 
 <img src=images/MSX2-C-MENU.PNG width=500px/>
 
-Screen 1
+#### Level 1 (Screen 1,2,3 y 4)
 
 <img src=images/MSX2-C-LEVEL1.PNG width=500px/>
 
+Screen 1
 
 <img src=images/MSX2-C-0.PNG width=500px/>
 
@@ -49,9 +50,15 @@ Screen 3
 
 Screen 4
 
-<img src=images/MSX2-C-LEVEL2.PNG width=500px/>
-
 <img src=images/MSX2-C-3.PNG width=500px/>
+
+
+
+
+
+#### Level 2 (screens 5,6,7 y 8)
+
+<img src=images/MSX2-C-LEVEL2.PNG width=500px/>
 
 Screen 5
 
@@ -63,13 +70,15 @@ Screen 6
 
 Screen 7
 
-<img src=images/MSX2-C-LEVEL3.PNG width=500px/>
-
 <img src=images/MSX2-C-6.PNG width=500px/>
 
 Screen 8
 
 <img src=images/MSX2-C-7.PNG width=500px/>
+
+Level 3 (Screens 9,10, 11 and end)
+
+<img src=images/MSX2-C-LEVEL3.PNG width=500px/>
 
 Screen 9
 
@@ -80,7 +89,7 @@ Screen 10
 
 <img src=images/MSX2-C-9.PNG width=500px/>
 
-Screen 11
+#### Screen 11
 
 <img src=images/MSX2-C-10.PNG width=500px/>
 
