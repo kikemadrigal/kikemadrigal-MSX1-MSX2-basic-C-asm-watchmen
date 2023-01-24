@@ -80,15 +80,15 @@ Level 3 (Screens 9,10, 11 and end)
 Screen 9
 
 
-<img src=images/MSX2-C-8.PNG width=500px/>
+<img src=images/MSX2-C8.PNG width=500px/>
 
 Screen 10
 
-<img src=images/MSX2-C-9.PNG width=500px/>
+<img src=images/MSX2-C9.PNG width=500px/>
 
 #### Screen 11
 
-<img src=images/MSX2-C-10.PNG width=500px/>
+<img src=images/MSX2-C10.PNG width=500px/>
 
 Screen final
 
