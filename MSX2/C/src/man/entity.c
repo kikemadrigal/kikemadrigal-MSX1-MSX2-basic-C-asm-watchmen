@@ -93,6 +93,12 @@
 #define tile_swipe_left 245
 #define tile_swipe_right 246
 
+typedef struct TGame TGame;
+struct TGame{
+    char level;
+    char lives;
+};
+
 typedef struct TEntity TEntity;
 struct TEntity{
     unsigned char type;
@@ -106,14 +112,14 @@ struct TEntity{
     unsigned char jump;
     unsigned char plane;
     unsigned int points;
-    unsigned int lives;
+    int lives;
     unsigned char collider;
 };
 typedef struct TTile TTile;
-struct TTile{
+/*struct TTile{
     unsigned char x;
     unsigned char y;
-};
+};*/
 
 #define MAX_enemies 4
 #define MAX_shots 1
@@ -129,6 +135,7 @@ char num_objects;
 
 //Functions
 void sys_entities_init();
+TGame* sys_entity_create_game();
 TEntity* sys_entity_create_player();
 TEntity* sys_enemy_create_enemy();
 TEntity* sys_enemy_create_shot();
@@ -158,6 +165,12 @@ char sys_entity_get_max_objects();
 
 
 //=======================================Definitions
+TGame game_template={
+    0, //level
+    0 //Lives
+};
+
+
 const TEntity player_template={
     entity_type_player, // Type
     entity_cmp_movable | entity_cmp_render | entity_cmp_input, //Components 
@@ -235,7 +248,9 @@ void sys_entities_init(){
     num_objects=0;
     num_shots=0;
 }
-
+TGame* sys_entity_create_game(){
+    return &game_template;
+} 
 
 
 TEntity* sys_entity_create_player(){

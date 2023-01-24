@@ -31,6 +31,7 @@ void man_game_reproducir_efecto_sonido(char effect);
 void player_die();
 void show_menu_screen();
 char sys_entity_get_num_moneys();
+void saveLevel();
 
 void wait();
 void debug();
@@ -47,7 +48,10 @@ unsigned char songBuffer[SONG_BUFFER_TAM];
 char fileNameSong[]={"song1.pt3"};
 FCB TFileMusic;
 
+
+TGame* game;
 char game_over;
+char gameRecovery;
 
 TEntity* player;
 char actual_world;
@@ -65,7 +69,7 @@ unsigned int destiny_y_door;
 unsigned int destiny_x_phone;
 unsigned int destiny_y_phone; 
 char collision_divan;
-char permitirPintarTiles;
+//char permitirPintarTiles;
 
 TEntity* array_enemies;
 TEntity* array_objects;
@@ -75,7 +79,8 @@ TEntity* array_shots;
 
 
 void man_game_init(){
-    permitirPintarTiles=1;
+
+    //permitirPintarTiles=1;
     //Encendemos la pantalla que estaba desactiavda desde basic
     ShowDisplay();
     //Inicializamos la pantalla en screen 5
@@ -92,7 +97,7 @@ void man_game_init(){
     //Pasamos los datos de la RAM a la VRAM page 0
     HMMC(&buffer[0], 0,0,256,212 ); 
     //memset(buffer,0,sizeof(buffer));
-    //El juego solo tendrá un archivo de tileset con todos los tiles
+    //El juego solo tendrá un archivo de tileset con todos los gametiles
     load_file_into_buffer("tileset.s05");
     //Pasamos todos los tileset a la page 1, fijate:
     // 1. que hemos puesto en inicio y: 256.
@@ -118,14 +123,14 @@ void man_game_init(){
     array_objects=sys_entity_get_array_structs_objects();
     array_shots=sys_entity_get_array_structs_shots();
     //le decimos que no hemos creado el 2 enemigo hasta que el tiempo sea menor que 100
-    created_enemy2=0;    
+    created_enemy2=0; 
+    //Comprobamos si hay datos guardados en el disco
+    checkPreferences();
+    game=sys_entity_create_game();
+    gameRecovery=0;
 }
 
 void man_game_play(){
-    
-
-
-
     while(1){
         /*
         unsigned int prev_count=0;
@@ -134,7 +139,8 @@ void man_game_play(){
         */
 
         show_menu_screen();
-        while(game_over==0){
+
+        while(game_over==0 && player->lives>0){
             if( IsVsync() == 1 ) continue;
             //Game
             man_game_update();
@@ -243,6 +249,7 @@ void man_game_play(){
                 enemy2->dir=3;
                 enemy2->plane+=sys_entity_get_num_enemies();
                 created_enemy2=1;
+                pintar_HUD();
             }
 
             /*
@@ -269,8 +276,9 @@ void man_game_play(){
 
 
 void player_die(){
-    
+    //saveLevel();
     SetRealTimer(0);
+    //FreeFX();
     //Hacemos una pausa
     for (int i=0;i<30000;i++);
     player->lives-=1;
@@ -278,16 +286,23 @@ void player_die(){
     player->jump=0;
     player->dir=3;
     sys_physics_update(player);
+
     man_game_reproducir_efecto_sonido(2);
+
     KillKeyBuffer();
 
-    world_change=1;
     if(player->lives<=0){
+        //saveLevel();
         game_over=1;
         SpriteOff();
+
+       
+
     }
-    pintar_HUD();
     
+    world_change=1;
+    pintar_HUD();
+        
 }
 
 
@@ -402,32 +417,34 @@ void man_game_update(){
                 actual_world_string="level10.bin";
                 break;
             case 11:
+                game_over=1;
+                SpriteOff();
                 PutText(30,100,"Final, has protegido el museo",8);
                 HMMM(14*8,256+(16*8),8*8,12*8,144,48);
-                WaitKey();
-                actual_world=0;
-                player->lives=1;
-                player_die();
+                while(Inkey()!=32){}
+                break;
             default:
                 actual_world_string="level11.bin";
                 break;
         }
         
+        if(game_over==0){
+            //cargamos el mapa en un array, es decir en una posición de la memoria "Buffer"
+            load_file_into_buffer_with_structure(actual_world_string);
+            //Pintamos en la pantalla según los datas
+            man_game_pintarMapa();
+            //Mostramos los sprites (si los hemos desactivado antes)
+            SpriteOn();
+            //Ponemos esto para que no vuelva a pedir esta función
+            world_change=0;
+            //Esto deshabilita la puerta para cambiar de mundo hasta que no se cojan las mondas y se capturen los enemigos
+            enabled_world_change=0;
+            //Pintamos la puntuacón una vez que hemos creado el numEnmeies
+            pintar_HUD();
+            SetRealTimer(0);
+            SpriteOn();
+        }
 
-        //cargamos el mapa en un array, es decir en una posición de la memoria "Buffer"
-        load_file_into_buffer_with_structure(actual_world_string);
-        //Pintamos en la pantalla según los datas
-        man_game_pintarMapa();
-        //Mostramos los sprites (si los hemos desactivado antes)
-        SpriteOn();
-        //Ponemos esto para que no vuelva a pedir esta función
-        world_change=0;
-        //Esto deshabilita la puerta para cambiar de mundo hasta que no se cojan las mondas y se capturen los enemigos
-        enabled_world_change=0;
-        //Pintamos la puntuacón una vez que hemos creado el numEnmeies
-        pintar_HUD();
-        SetRealTimer(0);
-        SpriteOn();
         
         //PutText(0,0,Itoa(player->plane,"  ",10),8);
         //PutText(20,0,Itoa(array_enemies[0].plane,"  ",10),8);
@@ -602,29 +619,7 @@ void debug(){
     TEntity *enemy=&array_enemies[3];
     //TEntity *shot=&array_shots[0];
     BoxFill (0, 23*8, 256, 210, 6, LOGICAL_IMP );
-    //PutText(30,200,actual_world_string,20);
-    //PutText(0,200,Itoa(sys_collider_get_tile_down_array(player),"  ",10),8);
-    //PutText(50,200,Itoa(count_down % 2,"  ",10),8);
-    //PutText(100,200,Itoa(sys_entity_get_num_enemies(),"  ",10),8); 
-    //PutText(150,200,Itoa(object3->plane,"  ",10),8); 
-    //int valorX=(buffer[0]);
-    //int valorY=(buffer[1]);
-
-    //PutText(0,200,Itoa(sys_entity_get_num_enemies(),"  ",10),8);
-    //PutText(0,200,Itoa(valorY,"  ",10),8);
-  
-
-
-    //printf("%d",buffer);
-  
-    //unsigned char *buf=getBuffer();
-    //PutText(150,200,Itoa(buf[0],"  ",10),8);
-    //PutText(0,200,Itoa(hours,"  ",10),8);
-    //PutText(50,200,Itoa(minutes,"  ",10),8);
-    //if(secunds>59)secunds=0;
-    //PutText(100,200,Itoa(secunds-60,"  ",10),8);
-    //memory_space=Peekw(0x0006);
-    //PutText(150,200,Itoa(memory_space,"  ",10),8);
+    PutText(20,192,Itoa(Inkey()," ",10),8);
 }
 
 void pintar_HUD(){
@@ -646,16 +641,25 @@ void pintar_HUD(){
     //Dibujamos los capturados
     HMMM(8*8,256+(3*8),15*8,23*8,16,16);
     PutText(140,192,Itoa(sys_entity_get_num_enemies()," ",10),8);
-    PutText(172,192,Itoa(sys_entity_get_num_moneys()," ",10),8);    
+    PutText(172,192,Itoa(sys_entity_get_num_moneys()," ",10),8);   
+
+    /*PutText(0,200,"Free: ",8);
+    unsigned int free=Peekw(0x0006);
+    PutText(70,200,Itoa(free,"          ",10),8);
+    PutText(150,200,"MSX type: ",8);
+    PutText(240,200,Itoa(ReadMSXtype()," ",10),8);*/
+    //PutText(70,200,Itoa(game->level,"  ",10),8);
+    //PutText(240,200,Itoa(gameRecovery," ",10),8);
 }
 
 void show_menu_screen(){
     Cls();
     KillKeyBuffer();
+    
     PutText(80,0, "The watchmen",0);
     PutText(0,16, "Eres un vigilante y como siempre estas durmiendo te han robado.",0);
     PutText(0,42, "Recoge las monedas que han ido perdiendo, atrapa a los ladrones por la espalda.",0);
-    HMMM(80,256,8,76,16,16);
+    HMMM(160,256+32,8,76,16,16);
     PutText(40,76, "Escondete en los biombos",0);
     HMMM(64,256+48,8,96,16,8);
     PutText(40,96, "El fuego te mata",0);
@@ -669,7 +673,8 @@ void show_menu_screen(){
     WaitForKey();
     SpriteOn();
     //le ponemos que el mundo actual sea el 0
-    actual_world=0;
+    if(gameRecovery==1)actual_world=game->level;
+    else actual_world=0;
     //Le ponemos que aplique que el mapa ha cambiado para que ponga
     // los objetos, enemigos y la posición del player del mundo correspondiente
     // Esto se aplica en el método man_game_update
@@ -677,4 +682,22 @@ void show_menu_screen(){
     //Inicializamos la variable game_over
     game_over=0;
     player->lives=5;
+}
+
+void saveLevel(){
+    //Cls();
+    //PutText(10,60, "Has llegado a la pantalla  ",0);
+    //PutText(20,70,Itoa(actual_world," ",10),8);
+    //PutText(20,80,Itoa(game->level," ",10),8);
+    PutText(10,100, "Deseas guardarla los avances? s/n",0);
+
+    while(Inkey()!=115 && Inkey()!=83 && Inkey()!=110 && Inkey()!=78){
+        if(Inkey()==115 || Inkey()==83 ){
+            gameRecovery=1;
+            game->level=actual_world;
+            saveGame();
+        }else if(Inkey()==110 || Inkey()==78){
+            gameRecovery=0;
+        }
+    }
 }

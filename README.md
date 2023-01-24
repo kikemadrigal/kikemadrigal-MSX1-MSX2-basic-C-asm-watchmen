@@ -53,9 +53,6 @@ Screen 4
 <img src=images/MSX2-C-3.PNG width=500px/>
 
 
-
-
-
 #### Level 2 (screens 5,6,7 y 8)
 
 <img src=images/MSX2-C-LEVEL2.PNG width=500px/>

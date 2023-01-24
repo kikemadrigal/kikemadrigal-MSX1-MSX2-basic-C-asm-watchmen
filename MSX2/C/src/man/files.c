@@ -12,7 +12,8 @@
 void enter_name_and_extension_in_structure(FCB *p_fcb, const char *p_name);
 void load_file_into_buffer(char *filename);
 void load_file_into_buffer_with_structure(char *p_name);
-
+void checkPreferences();
+void saveGame();
 //Un buffer es una dirección de memoria utilizada para escribir en ella reiteradamente
 //Lo utilizamos para cargar un sc5 y los archivos con los sprites
 #define BUFFER_SIZE 27142
@@ -71,3 +72,15 @@ void enter_name_and_extension_in_structure(FCB *p_fcb, const char *p_name)  // R
   }
 }
 
+void checkPreferences(){
+  int exists=Open("data.dat",O_RDONLY);   
+  if(exists==-1)Create("data.dat");
+}
+
+void saveGame(){
+  int file=Open("data.dat", O_RDONLY);
+  //printf("\n\rFichero %s abierto.", filename);
+  // Leyendo la tabla de patrones	de sprites
+  Write(file, &game_template, BUFFER_SIZE);
+  Close(file);
+}
