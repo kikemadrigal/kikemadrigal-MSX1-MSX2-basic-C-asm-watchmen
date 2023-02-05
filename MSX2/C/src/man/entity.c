@@ -12,9 +12,9 @@
 #define entity_type_enemy3       0x08  
 #define entity_type_shot         0x10  
 #define entity_type_object_money 0x16  
-#define entity_type_object_divan 0x32  
-#define entity_type_boss         0x80
-#define entity_type_dead         0x128  
+#define entity_type_object_divan1 0x32  
+#define entity_type_object_divan2 0x80
+#define entity_type_boss         0x128  
 #define entity_type_default      entity_type_enemy
 
 #define entity_cmp_render    0x01  //en binario=0000 0001- Renderable entity, entidad dibujable 
@@ -24,7 +24,7 @@
 #define entity_cmp_animated  0x10  //Animated entity
 #define entity_cmp_default   0x00  //DEfault components(all bits =0)
 
-
+/*
 #define shot_plane 0
 #define player_plane 5
 #define enemy1_plane 9
@@ -32,44 +32,62 @@
 #define divan1_plane 22
 #define divan2_plane 23
 #define object_any 24
+*/
 
+#define divan1_plane 0
+#define divan2_plane 1
+#define shot_plane 2
+#define player_plane 5
+#define enemy1_plane 11
+#define enemy2_plane 15
+#define enemy3_plane 21
+#define object_plane 27
+#define object_any 29
 
 //Definiendo patrones
-#define total_sprites 24
+#define total_patterns 30
 //Esto tiene que seguir el orden exacto en el que hemos metido los datos en la VRAM
-
+//Divan
+#define object_divan1_pattern 0*4 //Sprite 0
+#define object_divan2_pattern 1*4 //Sprite 1
 //Shots
-#define shot_pattern 0*4 //Sprite 2
+#define shot_pattern 2*4 //Sprite 2
 //Player
-#define player_left_pattern 1*4 //Sprite 2
-#define player_left_walking_pattern 2*4 //Sprite 3
-#define player_right_pattern 3*4 //Sprite 4
-#define player_right_walking_pattern 4*4 //Sprite 5
-#define player_up1_pattern 5*4 //Sprite 6
-#define player_up2_pattern 6*4 //Sprite 7
-#define player_jump_left_pattern 7*4 //Sprite 8
-#define player_Jump_right_pattern 8*4 //Sprite 9
+#define player_left_pattern 3*4 //Sprite 2
+#define player_left_walking_pattern 4*4 //Sprite 3
+#define player_right_pattern 5*4 //Sprite 4
+#define player_right_walking_pattern 6*4 //Sprite 5
+#define player_up1_pattern 7*4 //Sprite 6
+#define player_up2_pattern 8*4 //Sprite 7
+#define player_jump_left_pattern 9*4 //Sprite 8
+#define player_Jump_right_pattern 10*4 //Sprite 9
 
-//Enemiy 1 (este enemigo tan solo rebota de un lado a otro, ver sys/ai.c->sys_ai_update_enemy_behavior_1)
-#define enemy1_right_pattern 9*4 //Sprite 10
-#define enemy1_right_walking_pattern 10*4 //Sprite 11
-#define enemy1_left_pattern 11*4 //Sprite 12
-#define enemy1_left_walking_pattern 12*4 //Sprite 13
+//Enemy 1 (este enemigo tan solo rebota de un lado a otro, ver sys/ai.c->sys_ai_update_enemy_behavior_1)
+#define enemy1_right_pattern 11*4 //Sprite 10
+#define enemy1_right_walking_pattern 12*4 //Sprite 11
+#define enemy1_left_pattern 13*4 //Sprite 12
+#define enemy1_left_walking_pattern 14*4 //Sprite 13
 
-//Enemiy 2 (este enemigo tan solo rebota de un lado a otro, ver sys/ai.c->sys_ai_update_enemy_behavior_1)
-#define enemy2_right_pattern 13*4 //Sprite 10
-#define enemy2_right_walking_pattern 14*4 //Sprite 11
-#define enemy2_left_pattern 15*4 //Sprite 12
-#define enemy2_left_walking_pattern 16*4 //Sprite 13
-#define enemy2_up_pattern 17*4 //Sprite 13
-#define enemy2_up_walking_pattern 18*4 //Sprite 13
+//Enemy 2 (este enemigo te persigue bajando por las escaleras)
+#define enemy2_right_pattern 15*4 //Sprite 10
+#define enemy2_right_walking_pattern 16*4 //Sprite 11
+#define enemy2_left_pattern 17*4 //Sprite 12
+#define enemy2_left_walking_pattern 18*4 //Sprite 13
+#define enemy2_up_pattern 19*4 //Sprite 13
+#define enemy2_up_walking_pattern 20*4 //Sprite 13
+
+//Enemiy 3 (este enemigo te persigue lanzándose por el aire)
+#define enemy3_right_pattern 21*4 //Sprite 10
+#define enemy3_right_walking_pattern 22*4 //Sprite 11
+#define enemy3_left_pattern 23*4 //Sprite 12
+#define enemy3_left_walking_pattern 24*4 //Sprite 13
+#define enemy3_up_pattern 25*4 //Sprite 13
+#define enemy3_up_walking_pattern 26*4 //Sprite 13
 //Enemy 2
 //Objects
-#define object_money_pattern 19*4 //Sprite 14
-//#define object_any_pattern 20*4 //Sprite 14
-//Divan
-#define object_divan1_pattern 22*4 //Sprite 0
-#define object_divan2_pattern 23*4 //Sprite 1
+#define object_money_pattern 27*4 //Sprite 14
+#define object_any_pattern 29*4 //Sprite 14
+
 
 
 //Tiles
@@ -89,7 +107,8 @@
 #define tile_desabled_divan 168 //suelo >224
 #define tile_fire 200
 #define tile_fire2 201
-#define tile_disposable 249
+#define tile_disposable1 249
+#define tile_disposable2 250
 #define tile_swipe_left 245
 #define tile_swipe_right 246
 

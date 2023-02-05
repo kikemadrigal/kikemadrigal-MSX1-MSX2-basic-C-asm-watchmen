@@ -50,7 +50,7 @@ void sys_physics_update(TEntity *entity){
         //Colision player con el fuego
         if(tile_derecha==tile_fire || tile_derecha==tile_fire2 || tile_abajo==tile_fire ||  tile_abajo==tile_fire2 ) player_die();
         //El player está encima de un desechable
-        if(entity->dir==3 && get_tile_down_left_array(entity)==tile_disposable){
+        if(entity->dir==3 && get_tile_down_left_array(entity)==tile_disposable1 || get_tile_down_left_array(entity)==tile_disposable2){
             Beep();
             sys_collider_set_tile_down_left_array(entity, 255);
             BoxFill ((entity->x-entity->vx), entity->y+16, (entity->x-entity->vx)+8, (entity->y+16)+8, 15,LOGICAL_IMP );
@@ -58,7 +58,7 @@ void sys_physics_update(TEntity *entity){
 
 
         } 
-        if(entity->dir==7 && get_tile_down_right_array(entity)==tile_disposable){
+        if(entity->dir==7 && get_tile_down_right_array(entity)==tile_disposable1 || get_tile_down_right_array(entity)==tile_disposable2){
             Beep();
             sys_collider_set_tile_down_right_array(entity, 255);
             BoxFill ((entity->x+entity->vx*2), entity->y+16, (entity->x+entity->vx*2)+8, (entity->y+16)+8, 15,LOGICAL_IMP );

@@ -30,12 +30,13 @@ void sys_collider_init(){
 }
 
 int sys_collider_get_column_entity(TEntity *entity){
-  //Será la posición en x/8 pixeles el tile
-  //El +6 es para compensar los pixeles en blanco del sprite
-  return ((entity->x+6)/8);
+  if( entity->type==entity_type_enemy1 || entity->type==entity_type_enemy2 || entity->type==entity_type_enemy3) return (entity->x+8)/8;
+  if (entity->dir==3 || entity->dir==2) return (entity->x/8);
+  else return (entity->x+8)/8;
 }
 int sys_collider_get_file_entity(TEntity *entity){
   //Será la posición y / 8 pixeles
+  //if(entity->y % 8!=0) return;
   return (entity->y/8);
 }
 int sys_collider_get_tile_array(TEntity *entity){

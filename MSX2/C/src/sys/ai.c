@@ -9,23 +9,21 @@ void sys_ai_init();
 void sys_ai_update(TEntity *entity);
 void sys_ai_update_enemy_behavior_1(TEntity *enemy);
 void sys_ai_update_enemy_behavior_2(TEntity *enemy);
-void sys_ai_update_enemy_behavior_3(TEntity *enemy);
-int sys_ai_contador;
+
+//int sys_ai_contador;
 TEntity* player;
 
 //Definitions
 void sys_ai_init(){
-    sys_ai_contador=0;
+    //sys_ai_contador=0;
     player=sys_entity_create_player();
 }
 
 
 void sys_ai_update(TEntity *entity){
     if (entity->type==entity_type_enemy1)sys_ai_update_enemy_behavior_1(entity);
-    if (entity->type==entity_type_enemy2)sys_ai_update_enemy_behavior_2(entity);
-    if (entity->type==entity_type_boss){
-        //if(man_game_get_world()==0) sys_ai_update_enemy_boss1(entity);
-    }
+    if (entity->type==entity_type_enemy2 || entity->type==entity_type_enemy3)sys_ai_update_enemy_behavior_2(entity);
+   
 }
 
 void sys_ai_update_enemy_behavior_1(TEntity *enemy){
@@ -60,10 +58,13 @@ void sys_ai_update_enemy_behavior_2(TEntity *enemy){
         if(enemy->dir==7) enemy->dir=3;
         else if(enemy->dir==3) enemy->dir=7;
     }
-    if (get_tile_down_right_array(enemy)==tile_empty || get_tile_down_left_array(enemy)==tile_empty || sys_collider_get_tile_right_array(enemy)==tile_wall || sys_collider_get_tile_left_array(enemy)==tile_wall) {
-        if(enemy->dir==7) enemy->dir=3;
-        else if(enemy->dir==3) enemy->dir=7;
+    if(enemy->type==entity_type_enemy2){
+        if (get_tile_down_right_array(enemy)==tile_empty || get_tile_down_left_array(enemy)==tile_empty || sys_collider_get_tile_right_array(enemy)==tile_wall || sys_collider_get_tile_left_array(enemy)==tile_wall) {
+            if(enemy->dir==7) enemy->dir=3;
+            else if(enemy->dir==3) enemy->dir=7;
+        }
     }
+ 
     if(enemy->dir==1){
         if(sys_collider_get_tile_down_array(enemy)!=tile_stairs1){
             if(horizontal_distance>0) enemy->dir=3;
@@ -72,7 +73,7 @@ void sys_ai_update_enemy_behavior_2(TEntity *enemy){
     }else if(enemy->dir==3 || enemy->dir==7){
         /**/
         // si se encuentra abajo un tile vacío..
-        if(sys_collider_get_tile_down_array(enemy)==tile_empty){
+       if(sys_collider_get_tile_down_array(enemy)==tile_empty){
             if(vertical_distance>0) enemy->dir=5;
         } 
          //Si lo que tiene en los pies es una escalera, comprobará la distancia con el player u subirá o seguirá izquireda o dercha
@@ -109,9 +110,6 @@ void sys_ai_update_enemy_behavior_2(TEntity *enemy){
 
 
 
-void sys_ai_update_enemy_behavior_3(TEntity *enemy){
 
-
-}
 
 
