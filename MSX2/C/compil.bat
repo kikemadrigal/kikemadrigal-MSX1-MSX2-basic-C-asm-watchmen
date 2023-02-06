@@ -48,9 +48,9 @@ rem sjasm (http://www.xl2s.tk/) es un compilador de ensamblador z80 que puedo co
 rem necesitamos el .bin de la pantalla de carga y del reproductor de música
 
 
-rem java -jar tools\MSXTools\MSXTools.jar -m=c -o=assets\sprites.spr
-rem start /wait sjasm sprites.asm
-rem call tools\trim\trim.bat sprites.bin 50
+java -jar tools\MSXTools\MSXTools.jar -m=c -o=assets\sprites.spr
+start /wait sjasm sprites.asm
+call tools\trim\trim.bat sprites.bin 50
 rem start /wait sjasm asm/sprcol.asm
 
 start /wait sjasm asm/level0.asm
@@ -65,11 +65,11 @@ rem start /wait sjasm asm/level8.asm
 rem start /wait sjasm asm/level9.asm
 rem start /wait sjasm asm/level10.asm
 
-start /wait sjasm asm/e-coord.asm
-start /wait sjasm asm/g-coord.asm
-start /wait sjasm asm/o-coord.asm
+rem start /wait sjasm asm/e-coord.asm
+rem start /wait sjasm asm/g-coord.asm
+rem start /wait sjasm asm/o-coord.asm
 
-rem move /y sprites.bin .\dsk
+move /y sprites.bin .\dsk
 rem move /y sprcol.bin .\dsk
 
 move /y level0.bin .\dsk
@@ -84,9 +84,9 @@ rem move /y level8.bin .\dsk
 rem move /y level9.bin .\dsk
 rem move /y level10.bin .\dsk
 
-move /y e-coord.bin .\dsk
-move /y g-coord.bin .\dsk
-move /y o-coord.bin .\dsk
+rem move /y e-coord.bin .\dsk
+rem move /y g-coord.bin .\dsk
+rem move /y o-coord.bin .\dsk
 
 SET INC1=%INCLUDEDIR%crt0_msxdos.rel
 REM SET INC2=%INCLUDEDIR

@@ -156,17 +156,17 @@ char num_objects;
 void sys_entities_init();
 TGame* sys_entity_create_game();
 TEntity* sys_entity_create_player();
-TEntity* sys_enemy_create_enemy();
-TEntity* sys_enemy_create_shot();
-TEntity* sys_enemy_create_object();
+TEntity* sys_entity_create_enemy1();
+TEntity* sys_entity_create_shot();
+TEntity* sys_entity_create_object();
 void sys_entity_erase_enemy(char i);
 void sys_entity_erase_all_enemies();
 void sys_entity_erase_shot(char i);
 void sys_entity_erase_object(char i);
 void sys_entity_erase_all_objects();
-TEntity* sys_enemy_get_array_structs_enemies();
-TEntity* sys_enemy_get_array_structs_fires();
-TEntity* sys_enemy_get_array_structs_objects();
+TEntity* sys_entity_get_array_structs_enemies();
+TEntity* sys_entity_get_array_structs_fires();
+TEntity* sys_entity_get_array_structs_objects();
 char sys_entity_get_num_enemies();
 char sys_entity_get_num_shots();
 char sys_entity_get_num_objects();
@@ -195,7 +195,7 @@ const TEntity player_template={
     entity_cmp_movable | entity_cmp_render | entity_cmp_input, //Components 
     0,0,            //x,y  ,se lo asignamos en el game.c
     8*1,8*16,           //old position
-    4,16,             //width, heigh
+    8,16,             //width, heigh
     4,4,                 //speed X,speed Y 
     3,                   //direction
     0,                   //is it jumpimg?
@@ -241,7 +241,7 @@ const TEntity shot_template={
     entity_cmp_movable | entity_cmp_render, //Components 
     0,0,            //x,y  ,20*8 es el suelo, 8*16 plataforma
     0,0,           //old position
-    8,3,             //width, heigh
+    8,2,             //width, heigh
     8,8,                //speed X,speed Y 
     3,                  //direction
     0,                  //is it jumpimg?

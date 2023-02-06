@@ -43,20 +43,17 @@ void sys_physics_update(TEntity *entity){
             } 
         }
         //Colision con el margen izquierdo
-        if(entity->x<=0) entity->x=0;
-        else if(entity->x>=240) entity->x=240;
+        //if(entity->x<=0) entity->x=0;
+        //else if(entity->x>=240) entity->x=240;
         //Colision con el margen inferior
         if(entity->y>180) entity->y=212-16;
         //Colision player con el fuego
-        if(tile_derecha==tile_fire || tile_derecha==tile_fire2 || tile_abajo==tile_fire ||  tile_abajo==tile_fire2 ) player_die();
+        if(entity->dir==3 && tile_derecha==tile_fire || entity->dir==3 && tile_derecha==tile_fire2 ||entity->dir==7 && tile_izquierda==tile_fire || entity->dir==7 && tile_izquierda==tile_fire2 || tile_abajo==tile_fire ||  tile_abajo==tile_fire2 ) player_die();
         //El player está encima de un desechable
         if(entity->dir==3 && get_tile_down_left_array(entity)==tile_disposable1 || get_tile_down_left_array(entity)==tile_disposable2){
             Beep();
             sys_collider_set_tile_down_left_array(entity, 255);
             BoxFill ((entity->x-entity->vx), entity->y+16, (entity->x-entity->vx)+8, (entity->y+16)+8, 15,LOGICAL_IMP );
-            //PutText(0,200,Itoa(tile->x,"     ",10),8);
-
-
         } 
         if(entity->dir==7 && get_tile_down_right_array(entity)==tile_disposable1 || get_tile_down_right_array(entity)==tile_disposable2){
             Beep();
@@ -90,9 +87,13 @@ void sys_physics_check_keyboard(TEntity *entity){
         entity->dir=1;
         sys_anim_update(entity);
         //Irá hacia arriba solo si es uno de los tiles de la escalera
-        if(tile_pie==tile_stairs1 || tile_pie==tile_stairs2 || tile_abajo==tile_stairs1 || tile_abajo==tile_stairs2 ){
+        if(tile_abajo==tile_stairs1 || tile_abajo==tile_stairs2)entity_jump(entity);
+        //else if(tile_abajo==tile_stairs1 && tile_pie==tile_stairs1 ||  tile_abajo==tile_stairs1 && tile_pie==tile_stairs2 || tile_abajo==tile_stairs2 && tile_pie==tile_stairs2 ||  tile_abajo==tile_stairs2 && tile_pie==tile_stairs1 ){
+        else if(tile_abajo==tile_stairs1 || tile_abajo==tile_stairs2 && tile_pie==tile_stairs1 || tile_pie==tile_stairs1){
             entity->y-=entity->vy;
         //Si debajo no tiene ninguna escalera y no está saltando, saltamos
+        }else if(tile_abajo>=tile_floor_tile && tile_pie==tile_stairs1 || tile_pie==tile_stairs1){
+             entity->y-=entity->vy;
         }else if(entity->jump==0){
             entity_jump(entity);
         }
@@ -169,12 +170,13 @@ void sys_physics_check_keyboard(TEntity *entity){
 //Sistema de salto 1 parte
 void entity_jump(TEntity *entity){
     //Solo se puede saltar si no se está y aen un salto y si se está pegado a un sólido
-    if (entity->jump==0 && sys_collider_get_tile_down_array(entity)>=tile_floor_tile && sys_collider_get_tile_down_array(entity)<255){
+    if (entity->jump==0 && sys_collider_get_tile_down_array(entity)>=tile_stairs1 && sys_collider_get_tile_down_array(entity)!=tile_empty){
         //Activamos el salto
         entity->jump=1;  
         //invertimos la velocidad en y para que sume negativos y lo suba
         entity->vy*=-1;
         entity->old_y=entity->y;
+        
     }
 }
 

@@ -160,7 +160,7 @@ void man_game_play(){
                 sys_render_update(enemy);
                 if (sys_collider_entity1_collider_entity(player, enemy) && player->collider==0){
                     if(player->dir==3 && enemy->dir==3 || player->dir==7 && enemy->dir==7) {
-                        man_game_reproducir_efecto_sonido(1);
+                        man_game_reproducir_efecto_sonido(4);
                         sys_entity_erase_enemy(i);
                         pintar_HUD();
                         if(enemy->type==entity_type_enemy2) created_enemy2=0;
@@ -170,7 +170,7 @@ void man_game_play(){
                 //Rollo disparos
                 if(enemy->dir==7 && player->x < enemy->x || enemy->dir==3 && player->x > enemy->x){
                     if(sys_entity_get_num_shots()==0 && player->collider==0 && player->y<enemy->y+16 && player->y>=enemy->y ){
-                        man_game_reproducir_efecto_sonido(1);
+                        man_game_reproducir_efecto_sonido(3);
                         TEntity *shot=sys_entity_create_shot();
                         if(enemy->dir==3)shot->x=enemy->x+20;
                         else shot->x=enemy->x-20;
@@ -188,8 +188,8 @@ void man_game_play(){
                 sys_physics_update(shot);
                 //Colisión del disparo con el player
                 if (sys_collider_entity1_collider_shot(player, shot)){
-                    sys_entity_erase_shot(i);
                     player_die();
+                    sys_entity_erase_shot(i);
                 }else{
                     sys_render_update(shot);
                     //Cuando se sale el disparo de la pantalla
@@ -288,13 +288,17 @@ void man_game_play(){
 
 
 void player_die(){
-    man_game_reproducir_efecto_sonido(2);
+    player->y=220;
+    man_game_reproducir_efecto_sonido(4);
+    
     //saveLevel();
     //Ponemos el tiempo a cero
     SetRealTimer(0);
     //FreeFX();
     //Hacemos una pausa
-    for (int i=0;i<30000;i++);
+    for (int i=0;i<30000;i++){
+        man_game_reproducir_musica_y_efectos();
+    };
     player->lives-=1;
     player->collider=0;
     player->jump=0;
@@ -599,6 +603,7 @@ void man_game_reproducir_musica_y_efectos(){
     //PT3Rout();
     //PT3Play();
     //Si se está reproduciendo un efecto se actualizará
+    //2 es un Beep
     if (TestFX()==1){
       if (JIFFY!=0){
         JIFFY=0;
@@ -619,7 +624,7 @@ void man_game_cargar_buffer_efectos_sonido(){
 
 void man_game_reproducir_efecto_sonido(char effect){
   //El 1 es un ruido flojo y corto
-  //2 dos ruidos cortos y flojos
+  // 2 dos ruidos cortos y flojos
   // 3 un rebote
   // 4 son 5 captanillas que van desapareciendo
   // 5 3 captanillas cortas
@@ -639,10 +644,14 @@ void debug(){
     TEntity *object3=&array_objects[3];
     TEntity *object4=&array_objects[4];
     BoxFill (0, 23*8, 256, 210, 6, LOGICAL_IMP );
+    /*
     PutText(20,192,Itoa(enemy3->type," ",10),8);
     PutText(40,192,Itoa(enemy3->plane," ",10),8);
     PutText(80,192,Itoa(enemy3->dir," ",10),8);
     PutText(150,192,Itoa(sys_collider_get_tile_down_array(enemy3)," ",10),8);
+    */
+    PutText(20,192,Itoa(sys_collider_get_tile_down_array(player)," ",10),8);
+    PutText(80,192,Itoa(player->jump," ",10),8);
 }
 
 void pintar_HUD(){
@@ -689,7 +698,7 @@ void show_menu_screen(){
     SpriteOn();
     //le ponemos que el mundo actual sea el 0
     if(gameRecovery==1)actual_world=game->level;
-    else actual_world=0;
+    else actual_world=1;
     //else actual_world=8;
     //Le ponemos que aplique que el mapa ha cambiado para que ponga
     // los objetos, enemigos y la posición del player del mundo correspondiente
