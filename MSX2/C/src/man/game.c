@@ -79,7 +79,6 @@ TEntity* array_shots;
 
 
 void man_game_init(){
-
     //permitirPintarTiles=1;
     //Encendemos la pantalla que estaba desactiavda desde basic
     ShowDisplay();
@@ -151,7 +150,9 @@ void man_game_play(){
             //Player
             sys_physics_update(player);
             sys_render_update(player);
-           
+
+            //BoxFill (player->x, player->y, player->x+8, player->y+8, 6, LOGICAL_IMP );
+
             //Enemigos
             for (char i=0;i<sys_entity_get_num_enemies();++i){
                 TEntity *enemy=&array_enemies[i];
@@ -288,9 +289,13 @@ void man_game_play(){
 
 
 void player_die(){
-    player->y=220;
+    //KillKeyBuffer();
+    if(player->vy<0)player->vy*=-1;
+    player->lives-=1;
+    player->collider=0;
+    player->jump=0;
+    player->dir=3;
     man_game_reproducir_efecto_sonido(4);
-    
     //saveLevel();
     //Ponemos el tiempo a cero
     SetRealTimer(0);
@@ -299,13 +304,10 @@ void player_die(){
     for (int i=0;i<30000;i++){
         man_game_reproducir_musica_y_efectos();
     };
-    player->lives-=1;
-    player->collider=0;
-    player->jump=0;
-    player->dir=3;
-    sys_physics_update(player);
+
     
-    KillKeyBuffer();
+    
+
     if(player->lives<=0){
         //saveLevel();
         game_over=1;
@@ -378,6 +380,8 @@ void man_game_update(){
             object->plane+=sys_entity_get_num_objects()-1;   
             if( object->type==entity_type_object_divan1) object->plane=divan1_plane;
             if( object->type==entity_type_object_divan2) object->plane=divan2_plane;
+
+
             sys_render_update(object);
         }
         
@@ -390,7 +394,8 @@ void man_game_update(){
         destiny_y_door=buffer[numWorld+3];
         destiny_x_phone=buffer[numWorld+4];
         destiny_y_phone=buffer[numWorld+5];
-      
+    
+
 
         SpriteOff();
 
@@ -471,15 +476,10 @@ void man_game_update(){
             enabled_world_change=0;
             //Pintamos la puntuacón una vez que hemos creado el numEnmeies
             pintar_HUD();
-            SetRealTimer(0);
             SpriteOn();
         }
-
         //Ponemos para que se ppueda crear el enemigo malo 
         created_enemy2=0;
-        //PutText(0,0,Itoa(player->plane,"  ",10),8);
-        //PutText(20,0,Itoa(array_enemies[0].plane,"  ",10),8);
-        //PutText(80,0,Itoa(divan1_plane,"  ",10),8);
     }
 }
 
@@ -651,7 +651,7 @@ void debug(){
     PutText(150,192,Itoa(sys_collider_get_tile_down_array(enemy3)," ",10),8);
     */
     PutText(20,192,Itoa(sys_collider_get_tile_down_array(player)," ",10),8);
-    PutText(80,192,Itoa(player->jump," ",10),8);
+    PutText(80,192,Itoa(sys_collider_get_tile_array(player)," ",10),8);
 }
 
 void pintar_HUD(){
@@ -698,7 +698,7 @@ void show_menu_screen(){
     SpriteOn();
     //le ponemos que el mundo actual sea el 0
     if(gameRecovery==1)actual_world=game->level;
-    else actual_world=1;
+    else actual_world=0;
     //else actual_world=8;
     //Le ponemos que aplique que el mapa ha cambiado para que ponga
     // los objetos, enemigos y la posición del player del mundo correspondiente
@@ -710,10 +710,8 @@ void show_menu_screen(){
 }
 
 void saveLevel(){
-    //Cls();
-    //PutText(10,60, "Has llegado a la pantalla  ",0);
-    //PutText(20,70,Itoa(actual_world," ",10),8);
-    //PutText(20,80,Itoa(game->level," ",10),8);
+    /*Cls();
+
     PutText(10,100, "Deseas guardarla los avances? s/n",0);
 
     while(Inkey()!=115 && Inkey()!=83 && Inkey()!=110 && Inkey()!=78){
@@ -724,5 +722,5 @@ void saveLevel(){
         }else if(Inkey()==110 || Inkey()==78){
             gameRecovery=0;
         }
-    }
+    }*/
 }

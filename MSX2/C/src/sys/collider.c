@@ -4,7 +4,7 @@
 #include "../../src/man/files.c"
 
 /**************DECLARACIONES************/
-void sys_collider_init();
+//void sys_collider_init();
 
 int sys_collider_get_file_entity(TEntity *entity);
 int sys_collider_get_column_entity(TEntity *entity);
@@ -25,15 +25,16 @@ char sys_collider_entity1_collider_shot(TEntity *entity1, TEntity *shot);
 
 
 /**************DEFINICIONES************/
-void sys_collider_init(){
+/*void sys_collider_init(){
 
-}
+}*/
 
 int sys_collider_get_column_entity(TEntity *entity){
   if( entity->type==entity_type_enemy1 || entity->type==entity_type_enemy2 || entity->type==entity_type_enemy3) return (entity->x+8)/8;
-  //if (entity->dir==3 || entity->dir==2) return (entity->x/8);
-  //else return (entity->x+8)/8;
-  return (entity->x+8)/8;
+  if (entity->dir==3 || entity->dir==2)return entity->x/8;
+  else return (entity->x+10)/8;
+
+ 
 }
 int sys_collider_get_file_entity(TEntity *entity){
   //Será la posición y / 8 pixeles
@@ -63,7 +64,6 @@ int sys_collider_get_tile_up_array(TEntity *entity){
 int sys_collider_get_tile_down_array(TEntity *entity){
   //Le sumamos 2 a la fila porque es un sprite de 16*16px, para ver el tile del suelo
   int tile_abajo=buffer[((sys_collider_get_file_entity(entity)+2)*32)+(sys_collider_get_column_entity(entity))];
-  if (entity->dir==3) tile_abajo=buffer[((sys_collider_get_file_entity(entity)+2)*32)+(sys_collider_get_column_entity(entity)-1)];
   return tile_abajo; 
 }
 

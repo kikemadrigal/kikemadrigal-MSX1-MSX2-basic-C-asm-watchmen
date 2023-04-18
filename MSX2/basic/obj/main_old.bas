@@ -21,16 +21,12 @@
 140 gosub 5000
 1 'Inicializamos a los enemigos'
 150 gosub 6000
-1'------------MUSICA-------------
-1 '160 bload"musicint.bin",r
+160 bload"musicint.bin",r
 1 'inicio de la música'
-1 '200 defusr5=&hD100
+200 defusr5=&hD100
 1 'Parar música'
-1 '220 defusr6=&hD12B
-1 'Reproducir música'
-1 '230 a=usr5(0)
+220 defusr6=&hD12B
 1 'Pantalla de bienvenida'
-1'---------FIN MUSICA-----------
 370 cls:preset (80,10):print #1,"!The wathmen"
 380 preset (70,20):print #1,"!MSX Murcia 2022"
 390 preset (0,70):print #1,"!Debes de atrapar a los ladores por detras, si los coges por delente te matan"
@@ -40,7 +36,7 @@
 455 preset (0,170):print #1,"!El rojo: te permite empujar bloques para atrapar a los enemigos"
 460 if strig(0)=-1 then goto 470 else goto 460
  1 ' Pintamos el level 0 en la page 0 '
-470 gosub 20100
+470 a=usr6(0):gosub 20100
 1 'Inicializmos las variables globales del juego'
 475 gosub 10000
 1 'Inicializamos los objetos'
@@ -56,7 +52,8 @@
 1 'Mostramos el HUD'
 550 gosub 2900
 
-
+1 'Reproducir música'
+560 a=usr5(0)
 
 1 ' ----------------------'
 1 '      MAIN LOOP
@@ -322,9 +319,9 @@
         1 'Sprite 2 dibán, sprite 3 blanco para ocultarse'
         10100 if ws=0 and ls=0 then gosub 10300
         1' level 1'
-        10120 if ws=0 and ls=1 then gosub 10400
+        1 '10120 if ws=0 and ls=1 then gosub 10400
         1' level 2'
-        10140 if ws=0 and ls=2 then gosub 10500
+        1 '10140 if ws=0 and ls=2 then gosub 10500
         1' level 3'
         10160 'if ws=0 and ls=3 then gosub 10600
         1' level 4

@@ -29,7 +29,8 @@ void sys_physics_update(TEntity *entity){
     tile_derecha=sys_collider_get_tile_right_array(entity);
     tile_izquierda=sys_collider_get_tile_left_array(entity);
     tile_arriba=sys_collider_get_tile_up_array(entity);
-    tile_abajo=sys_collider_get_tile_down_array(entity);
+
+     tile_abajo=sys_collider_get_tile_down_array(entity);
     tile_pie=sys_collider_get_tile_array(entity);
     if (entity->type==entity_type_player){
         sys_physics_check_keyboard(entity);
@@ -49,20 +50,23 @@ void sys_physics_update(TEntity *entity){
         if(entity->y>180) entity->y=212-16;
         //Colision player con el fuego
         if(entity->dir==3 && tile_derecha==tile_fire || entity->dir==3 && tile_derecha==tile_fire2 ||entity->dir==7 && tile_izquierda==tile_fire || entity->dir==7 && tile_izquierda==tile_fire2 || tile_abajo==tile_fire ||  tile_abajo==tile_fire2 ) player_die();
+        
         //El player está encima de un desechable
-        if(entity->dir==3 && get_tile_down_left_array(entity)==tile_disposable1 || get_tile_down_left_array(entity)==tile_disposable2){
+        //if(entity->dir==7 && get_tile_down_left_array(entity)==tile_disposable1 || get_tile_down_left_array(entity)==tile_disposable2){
+        if(entity->dir==3 && get_tile_down_left_array(entity)==tile_disposable1 || entity->dir==3 && get_tile_down_left_array(entity)==tile_disposable2){
             Beep();
             sys_collider_set_tile_down_left_array(entity, 255);
             BoxFill ((entity->x-entity->vx), entity->y+16, (entity->x-entity->vx)+8, (entity->y+16)+8, 15,LOGICAL_IMP );
         } 
-        if(entity->dir==7 && get_tile_down_right_array(entity)==tile_disposable1 || get_tile_down_right_array(entity)==tile_disposable2){
+        if(entity->dir==7 && get_tile_down_right_array(entity)==tile_disposable1 || entity->dir==7 && get_tile_down_right_array(entity)==tile_disposable2){
             Beep();
             sys_collider_set_tile_down_right_array(entity, 255);
             BoxFill ((entity->x+entity->vx*2), entity->y+16, (entity->x+entity->vx*2)+8, (entity->y+16)+8, 15,LOGICAL_IMP );
         }
      
         //Gravedad, bajará hasta que el tile de debajo sea suelo o escalera
-        if (sys_collider_get_tile_down_array(entity)<tile_stairs1 || sys_collider_get_tile_down_array(entity)>=255){
+         //if (sys_collider_get_tile_down_array(entity)>=tile_floor_tile) 
+        if (sys_collider_get_tile_down_array(entity)<tile_stairs1 || sys_collider_get_tile_down_array(entity)>=tile_empty){
             //Beep();
             entity->y+=entity->vy;
         } 
@@ -86,10 +90,11 @@ void sys_physics_check_keyboard(TEntity *entity){
     if(joy==1){
         entity->dir=1;
         sys_anim_update(entity);
-        //Irá hacia arriba solo si es uno de los tiles de la escalera
+        //Si hay un tile escalera en el suelo salta
         if(tile_abajo==tile_stairs1 || tile_abajo==tile_stairs2)entity_jump(entity);
         //else if(tile_abajo==tile_stairs1 && tile_pie==tile_stairs1 ||  tile_abajo==tile_stairs1 && tile_pie==tile_stairs2 || tile_abajo==tile_stairs2 && tile_pie==tile_stairs2 ||  tile_abajo==tile_stairs2 && tile_pie==tile_stairs1 ){
-        else if(tile_abajo==tile_stairs1 || tile_abajo==tile_stairs2 && tile_pie==tile_stairs1 || tile_pie==tile_stairs1){
+        //Si el tile de abajo es una escalera y
+        else if(tile_abajo==tile_stairs1 &&  tile_pie==tile_stairs1 || tile_abajo==tile_stairs2 && tile_pie==tile_stairs1 || tile_abajo==tile_stairs2 &&  tile_pie==tile_stairs2){
             entity->y-=entity->vy;
         //Si debajo no tiene ninguna escalera y no está saltando, saltamos
         }else if(tile_abajo>=tile_floor_tile && tile_pie==tile_stairs1 || tile_pie==tile_stairs1){

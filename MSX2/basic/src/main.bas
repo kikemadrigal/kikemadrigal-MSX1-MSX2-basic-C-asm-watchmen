@@ -21,12 +21,16 @@
 140 gosub 5000
 1 'Inicializamos a los enemigos'
 150 gosub 6000
-160 bload"musicint.bin",r
+1'------------MUSICA-------------
+1 '160 bload"musicint.bin",r
 1 'inicio de la música'
-200 defusr5=&hD100
+1 '200 defusr5=&hD100
 1 'Parar música'
-220 defusr6=&hD12B
+1 '220 defusr6=&hD12B
+1 'Reproducir música'
+1 '230 a=usr5(0)
 1 'Pantalla de bienvenida'
+1'---------FIN MUSICA-----------
 370 cls:preset (80,10):print #1,"!The wathmen"
 380 preset (70,20):print #1,"!MSX Murcia 2022"
 390 preset (0,70):print #1,"!Debes de atrapar a los ladores por detras, si los coges por delente te matan"
@@ -36,7 +40,7 @@
 455 preset (0,170):print #1,"!El rojo: te permite empujar bloques para atrapar a los enemigos"
 460 if strig(0)=-1 then goto 470 else goto 460
  1 ' Pintamos el level 0 en la page 0 '
-470 a=usr6(0):gosub 20100
+470 gosub 20100
 1 'Inicializmos las variables globales del juego'
 475 gosub 10000
 1 'Inicializamos los objetos'
@@ -52,8 +56,7 @@
 1 'Mostramos el HUD'
 550 gosub 2900
 
-1 'Reproducir música'
-560 a=usr5(0)
+
 
 1 ' ----------------------'
 1 '      MAIN LOOP
@@ -368,35 +371,35 @@
     1 'Pinatmos un sprite en blanco que ocultará por completo al player'
     10380 put sprite 3,(ox(1),oy(1)),15+32,14
 10390 return
-10400 la=0:lg=3:lz(0)=0:lz(1)=16*8:lz(2)=6*8
-    10410 px=4*8:py=16*8
-    10420 ex(0)=14*8:ey(0)=11*8
-    10430 ox(0)=2*8:oy(0)=16*8
-    10435 ox(1)=13*8:oy(1)=11*8
-    10440 ox(2)=2*8:oy(2)=5*8
-    10450 put sprite 2,(ox(1),oy(1)),6+32,13
-    10460 put sprite 3,(ox(1),oy(1)),15+32,14
-10490 return
-10500 la=0:lg=3
-    10510 lz(0)=0:lz(1)=8*8:lz(2)=12*8
-    10520 ex(0)=230:ey(0)=16*8
-    10530 px=0:py=16*8
-    10540 ox(0)=26*8:oy(0)=10*8
-    10550 ox(1)=13*8:oy(1)=16*8
-    10560 ox(2)=29*8:oy(2)=5*8
-    10570 put sprite 2,(ox(1),oy(1)),6+32,13
-    10580 put sprite 3,(ox(1),oy(1)),15+32,14
-10590 return
-10500 la=0:lg=3
-    10510 lz(0)=0:lz(1)=10*8:lz(2)=16*8
-    10520 ex(0)=230:ey(0)=4*8
-    10530 px=0:py=16*8
-    10540 ox(0)=26*8:oy(0)=10*8
-    10550 ox(1)=25*8:oy(1)=14*8
-    10560 ox(2)=0*8:oy(2)=5*8
-    10570 put sprite 2,(ox(1),oy(1)),6+32,13
-    10580 put sprite 3,(ox(1),oy(1)),15+32,14
-10590 return
+1 '10400 la=0:lg=3:lz(0)=0:lz(1)=16*8:lz(2)=6*8
+1 '    10410 px=4*8:py=16*8
+1 '    10420 ex(0)=14*8:ey(0)=11*8
+1 '    10430 ox(0)=2*8:oy(0)=16*8
+1 '    10435 ox(1)=13*8:oy(1)=11*8
+1 '    10440 ox(2)=2*8:oy(2)=5*8
+1 '    10450 put sprite 2,(ox(1),oy(1)),6+32,13
+1 '    10460 put sprite 3,(ox(1),oy(1)),15+32,14
+1 '10490 return
+1 '10500 la=0:lg=3
+1 '    10510 lz(0)=0:lz(1)=8*8:lz(2)=12*8
+1 '    10520 ex(0)=230:ey(0)=16*8
+1 '    10530 px=0:py=16*8
+1 '    10540 ox(0)=26*8:oy(0)=10*8
+1 '    10550 ox(1)=13*8:oy(1)=16*8
+1 '    10560 ox(2)=29*8:oy(2)=5*8
+1 '    10570 put sprite 2,(ox(1),oy(1)),6+32,13
+1 '    10580 put sprite 3,(ox(1),oy(1)),15+32,14
+1 '10590 return
+1 '10500 la=0:lg=3
+1 '    10510 lz(0)=0:lz(1)=10*8:lz(2)=16*8
+1 '    10520 ex(0)=230:ey(0)=4*8
+1 '    10530 px=0:py=16*8
+1 '    10540 ox(0)=26*8:oy(0)=10*8
+1 '    10550 ox(1)=25*8:oy(1)=14*8
+1 '    10560 ox(2)=0*8:oy(2)=5*8
+1 '    10570 put sprite 2,(ox(1),oy(1)),6+32,13
+1 '    10580 put sprite 3,(ox(1),oy(1)),15+32,14
+1 '10590 return
 
 
 

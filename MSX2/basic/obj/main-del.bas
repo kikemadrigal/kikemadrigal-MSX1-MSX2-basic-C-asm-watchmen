@@ -109,8 +109,6 @@
 10000dimlz(5)
 10090return
 10100ifws=0andls=0thengosub10300
-10120ifws=0andls=1thengosub10400
-10140ifws=0andls=2thengosub10500
 10160'ifws=0andls=3thengosub10600
 10180'ifws=0andls=4thengosub10700
 10200'ifws=0andls=5thengosub10800
