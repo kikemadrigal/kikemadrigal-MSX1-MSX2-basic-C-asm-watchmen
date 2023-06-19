@@ -9,6 +9,7 @@
 
 https://kikemadrigal.github.io/kikemadrigal-MSX1-MSX2-basic-C-asm-watchmen/?disk=MSX2-C.dsk
 
+
 ### Sprite sheet
 
 He uilizado el famoso gran programa de MSX Spain "MSX tools":
@@ -97,7 +98,7 @@ Screen final
 
 #### Basic 
 
-https://kikemadrigal.github.io/MSX1-MSX2-basic-C-asm-watchmen/?disk=MSX2-basic.dsk
+https://kikemadrigal.github.io/kikemadrigal-MSX1-MSX2-basic-C-asm-watchmen/?disk=MSX2-basic.dsk
 
 
 <img src=images/MSX2-basic.PNG width=500px/>
@@ -119,7 +120,7 @@ https://kikemadrigal.github.io/MSX1-MSX2-basic-C-asm-watchmen/?disk=MSX2-basic.d
 
 ### MSX1
 
-http://msx.tipolisto.es/webmsx/standalone/?disk=files/whatchmen.dsk
+https://kikemadrigal.github.io/kikemadrigal-MSX1-MSX2-basic-C-asm-watchmen/?disk=MSX1-basic.dsk
 
 <img src=images/1.PNG width=300px/>
 

@@ -25,7 +25,9 @@ for /R bin %%a in (*.bin) do (
 
 
 rem Le quitamos los comentarios a game.bas
-java -jar tools/deletecomments/deletecomments1.2.jar src/main.bas obj/game.bas  
+rem java -jar tools/deletecomments/deletecomments1.2.jar src/main.bas obj/game.bas  
+java -jar tools\MSXTools\MSXTools.jar -m=d -o=src\main.bas
+move /y main-del.bas .\obj\game.bas
 
 rem Lo tokenizamos
 rem start /wait tools/tokenizer/msxbatoken.py obj/game.asc obj/game.bas 
